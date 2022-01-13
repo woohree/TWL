@@ -151,7 +151,7 @@ $ git push origin master
 
 
 
-## --help
+## *--help*
 
 명령어 이후 무엇을 명령어로 써야할 지 모른다면 쓰기
 
