@@ -103,7 +103,7 @@ origin이란 key값에 벨류를 넣겠다.
 
 origin은 다른 단어로 바꾸어도 무방하고, 따라서 여러 주소를 지정 가능
 
-### *cf촬영장 비유*
+### *촬영장 비유*
 
 #### 스테이지
 
@@ -149,9 +149,31 @@ $ git remote add origin https://
 $ git push origin master
 ```
 
+### README.md
 
+내 git 대문 
 
-## *--help*
+### .gitignore
+
+#### 반드시 ignore부터 만들고 시작!!!!!!!!!
+
+#### 업로드 되지 않았으면 하는 파일 혹은 폴더 등을 지정하여 push되지 않게 설정해주는 파일
+
+gitignore.io 에 들어가서 windows, python, VScode 해서 생성하면 얘들이랑 관련해서 ignore 파일 자동으로 싹 만들어줌 
+
+그 외
+
+plan.md #파일
+
+plan/ #폴더
+
+등 
+
+#### 만약 올렸다면? 
+
+파일 지우거나 / add 후 제외하고 반드시 다시 "push" 해 주어야 함
+
+### *--help*
 
 명령어 이후 무엇을 명령어로 써야할 지 모른다면 쓰기
 
