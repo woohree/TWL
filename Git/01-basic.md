@@ -1,6 +1,6 @@
-# 01-13. git 기초
+# Git 기초
 
-## 깃이 관리 하는 폴더: 리포(repo.)
+## git이 관리 하는 폴더: 리포(repo.)
 
 ### git init: 
 
@@ -139,9 +139,9 @@ local repo - remote repo
 $ git remote add origin https://
 ```
 
-### 기존의 깃허브를 바꿀 경우
+### 기존 깃허브 설정을 바꿀 경우
 
-윈도우키 - 자격증명관리자 검색 - 윈도우 자격 증명 - github 찾기 - 이후 구글링해야겠다
+윈도우키 - 자격증명관리자 검색 - 윈도우 자격 증명 - github 찾아서 ID, PW 편집
 
 ### hub에 올리기
 
@@ -153,28 +153,59 @@ $ git push origin master
 
 내 git 대문 
 
-### .gitignore
+### .gitignore (반드시 ignore부터 만들고 시작!!!!!!!!!)
 
-#### 반드시 ignore부터 만들고 시작!!!!!!!!!
-
-#### 업로드 되지 않았으면 하는 파일 혹은 폴더 등을 지정하여 push되지 않게 설정해주는 파일
+업로드 되지 않았으면 하는 파일 혹은 폴더 등을 지정하여 push되지 않게 설정해주는 파일
 
 gitignore.io 에 들어가서 windows, python, VScode 해서 생성하면 얘들이랑 관련해서 ignore 파일 자동으로 싹 만들어줌 
 
 그 외
 
-plan.md #파일
+plan.md #파일, plan/ #폴더 등 
 
-plan/ #폴더
-
-등 
-
-#### 만약 올렸다면? 
+#### 만약 중요한 파일을 github에 올렸다면? 
 
 파일 지우거나 / add 후 제외하고 반드시 다시 "push" 해 주어야 함
 
-### *--help*
+### 명령어
+
+#### clone
+
+리모트에 있는 내용 로컬로 복사해오기
+
+```
+$ git clone <URL>
+```
+
+new-repo-name으로 최상단 폴더 이름이 바뀌어서 가져옴
+
+```
+$ git clone <URL> new-repo-name 
+```
+
+#### pull
+
+오리진의 내용 가져오기(push와 반대 개념이라 생각)
+
+```
+$ git pull origin master
+```
+
+### github에서 수정할 시 주의사항(팀워크 시 자주 발생)
+
+github에서 수정을 한다면 반드시 커밋을 작성하고 로컬에서 반드시 pull을 해야함
+
+만약 pull 이전에, 로컬에서 수정하고 push를 먼저 한다면 꼬여버림 혹은 거절당함 *넥서스 사건 안생기게 주의..*
+
+그래서 다시 pull부터 하고 선택하면됨
+
+### VS 명령어: ctrl + c, ctrl + l
+
+c는 일단 취소! / l은 clear !
+
+## *--help*
 
 명령어 이후 무엇을 명령어로 써야할 지 모른다면 쓰기
 
 그 자리에 쓸 수 있는 여러 명령어를 보여줌
+
