@@ -198,7 +198,7 @@ print(p1.name, p1.age)
 
 - 클래스가 사용할 메소드
 - @staticmethod
-- 호출 시, **어떠한 인자도 전달되지 않음**(클래스 정보에 접근/수정 불가)
+- 호출 시, **어떠한 인자도 자동으로 전달되지 않음**(클래스 정보에 접근/수정 불가)
 
 예시)
 
@@ -338,7 +338,7 @@ baby1.gene()  # XY
 - 기존 인스턴스 - 자식 클래스 - 부모 클래스 순으로 확장
 
 ```python
-Baby.mro()
+Baby.__mro__ # 혹은 Baby.mro()
 # [__main__.Baby, __main__.Dad, __main__.Mom, __main__.Person, object]
 ```
 
