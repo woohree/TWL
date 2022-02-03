@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <!-- img, h1 -->
+        <a href="https://www.ssafy.com">
+            <img src="https://www.ssafy.com/swp/images/sns_img.png" alt="ssafy 로고">
+        </a>
+    </header>
+    
+    <section>
+        <!-- 이름, 지역, 체온, 제출 -->
+        <form action="">
+            <div>
+                <label for="name">이름을 입력해</label>
+                <input type="text" id='name' name='name' autofocus required>
+            </div>
+            <hr>
+            <div>
+                <label for="region">지역을 골라</label>
+                <select name="region" id="region" required>
+                    <option value="">선택2022</option>
+                    <option value="1">서울</option>
+                    <option value="2">대전</option>
+                    <option value="3">구미</option>
+                    <option value="4">광주</option>
+                    <option value="5">부울경</option>
+                </select>
+            </div>
+            <hr>
+            <div>
+                <p>체온을 선택해</p>
+                <div>
+                <input type="radio" id='normal' name='temperature' value='normal' checked>
+                <label for="normal">37도 미만</label>
+                </div>
+                <div>
+                <input type="radio" id='warning' name='temperature' value='warning'>
+                <label for="warning">37도 이상</label>                
+                </div>
+            </div>
+            <div>
+                <input type="submit" value='제출!@'>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <!-- 경고 문구 -->
+        Google 설문지를 통해 비밀번호를 제출하지 마셍~
+    </footer>
+</body>
+</html>
