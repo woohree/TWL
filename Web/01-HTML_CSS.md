@@ -20,7 +20,7 @@
 
 - html의 요소는 태그와 내용으로 구성
 
-  \<h1>contents\</h1>
+  `<h1>contents</h1>`
 
 - 태그별로 사용할 수 있는 속성은 다름
 
@@ -49,9 +49,19 @@
 
 ### CSS 단위
 
+- 자손 결합자
+
+  하위 모든 요소
+
+- 자식 결합자
+
+  바로 아래의 요소
+
 ### Selectors 심화
 
 ### Box model
+
+- 보통 border 를 기준으로 box를 만들기 때문에, box-sizing을 border 중심으로 만듬
 
 ### Display
 
