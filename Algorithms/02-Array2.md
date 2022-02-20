@@ -8,7 +8,7 @@
 
 - ```python
   N = int(input())
-  arr = [list(map(int, input()))) for _ in range(N)]
+  arr = [list(map(int, input())) for _ in range(N)]
   ```
 
 - 행 우선, 열 우선 순회
@@ -76,7 +76,7 @@
   ```
 
   ```python
-  a = 1 >> 4  # 16
+  a = 1 << 4  # 16
   ```
 
   - 비트 연산자
@@ -87,8 +87,8 @@
 
   ```python
   arr = [3, 6, 7, 1, 5, 4]
-  n = len(arr)
-  for i in range(1<<n):  # 1<<n 부분 집합의 갯수 (0~32 2진수 묶음)
+  n = len(arr) - 1
+  for i in range(1<<n):  # 1<<n 부분 집합의 갯수 (0~63 2진수 묶음)
       for j in range(n):  # 원소의 수만큼 비트를 비교함
           if i & (1<<j):  # i의 j번 비트가 1인 경우
               print(arr[j], end='')  # j번 원소 출력

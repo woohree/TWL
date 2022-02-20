@@ -29,14 +29,42 @@
   - 첫 원소부터 인접한 원소끼리 계속 자리를 교환하면서 마지막 자리까지 이동
   - 한 단계가 끝나면 가장 큰 원소가 마지막 자리로 정렬
   - 교환하며 자리를 이동하는 모습이 물 위로 올라오는 거품같다...?
+  
 - O(n^2)
+
+  ```python
+  def BubbleSort(A, n):
+      for i in range(n-1, 0, -1):
+          for j in range(i):
+              if A[j] > A[j+1]:
+                  A[j], A[j+1] = A[j+1], A[j]
+      return A
+  ```
+
+  
 
 ### 카운팅 정렬(Counting sort)
 
 - 항목들의 순서를 결정하기 위해 집합에 각 항목이 몇 개씩 있는지 세는 작업을 하여, 선형 시간에 정렬하는 효율적인 알고리즘
+
 - O(n+k): n은 리스트 길이, k는 정수의 최댓값
 
+  ```python
+  def CountingSort(A, B, k):
+      C = [0] * (k+1)
+      
+      for i in range(len(A)):
+          C[A[i]] += 1
+          
+      for i in range(1, len(C)):
+          C[i] += C[i-1]
+          
+      for i in range(len(B)-1, -1, -1):
+          C[A[i]] -= 1
+          B[C[A[i]]] = A[i]
+  ```
 
+  
 
 ## Baby-gin game
 
