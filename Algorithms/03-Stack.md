@@ -85,10 +85,145 @@
 
   
 
-## DFS(Depth Firset Search)
+## DFS(Depth First Search)
 
-- 깊이우선탐색
-- 
+- 깊이우선탐색 - 그래프와 연계
+
+- 가장 마지막에 만났던 갈림길의 정점으로 되돌아가서 다시 깊이 우선 탐색을 반복
+
+- 스택 사용
 
 
+
+
+## 백트래킹(Backtracking)
+
+- 근데 이제 DFS를 곁들인...
+- DFS에서 조건을 걸어서 더 깊게 들어가지 않게 해 과정을 줄이는 기법
+
+- 해를 찾는 도중에 막히면(해가 아니면) 되돌아가서 다시 해를 찾아가는 기법
+
+  ```python
+  def f(i, N, s, t, rs):  # i 부분집합에 포함될 지 결정할 원소의 인덱스, N 전체 원소 개수, t s 이전까지 찾는 부분집합의 합 값
+      global cnt
+      cnt += 1
+      if s == t:
+          for j in range(N):
+              if bit[j] == 1:
+                  print(a[j], end=' ')
+          print()
+      elif i == N:
+          return
+      elif s > t:
+          return
+      elif rs+s < t:
+          return
+      else:
+          bit[i] = 1
+          f(i + 1, N, s + a[i], t, rs-a[i])
+          bit[i] = 0
+          f(i + 1, N, s, t, rs-a[i])
+  
+      return
+  
+  
+  N = 10
+  cnt = 0
+  a = [x for x in range(1, N + 1)]
+  bit = [0] * N
+  t = 55
+  f(0, N, 0, t, sum(a))
+  print(cnt)
+  ```
+
+
+
+## 분할정복 알고리즘
+
+### 순열 구하기(부분집합)
+
+```python
+def get_subsets(idx):
+    if idx == N:
+        # print(result)
+        print(ans)
+        return
+    result[idx] = True
+    ans.append(numbers[idx])
+    get_subsets(idx+1)
+    result[idx] = False
+    ans.pop()
+    get_subsets(idx+1)
+
+
+N = len(numbers)
+result = [None] * N
+ans = []
+
+get_subsets(0)
+```
+
+
+
+### 퀵 정렬(Quick Sort)
+
+
+```python
+# 이해하기 좀더 편한 ver. 
+# python은 신이다.
+
+def quicksort(array):
+    N = len(array)
+    if N <= 1:
+        return array
+    pivot = N // 2
+    rest = array[:pivot] + array[pivot+1:]
+
+    left = []
+    right = []
+
+    for n in rest:
+        if array[pivot] < n:
+            right.append(n)
+        else:
+            left.append(n)
+    
+    sorted_left = quicksort(left)
+    sorted_right = quicksort(right)
+
+    return sorted_left + [array[pivot]] + sorted_right
+
+
+numbers = [6, 2, 3, 1, 5, 4]
+print(quicksort(numbers))
+```
+
+
+
+```python
+# Original ver.
+
+def quicksort(a, begin, end):
+    if begin < end:
+        p = partition(a, begin, end)
+        quicksort(a, begin, p-1)
+        quicksort(a, p+1, end)
+
+def partition(a, begin, end):
+    pivot = (begin+end) // 2
+    L = begin
+    R = end
+    while L < R:
+        while(L < R and a[L] < a[pivot]) : L += 1
+        while(L < R and a[R] >= a[pivot]) : R -= 1
+        if L < R:
+            if L == pivot : pivot = R
+            a[L], a[R] = a[R], a[L]
+    a[pivot], a[R] = a[R], a[pivot]
+    return R
+
+a = [69,10,30,2,16,8,31,22]
+quicksort(a, 0, len(a)-1)
+print(a)
+```
 
