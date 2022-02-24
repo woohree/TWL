@@ -163,6 +163,63 @@ ans = []
 get_subsets(0)
 ```
 
+```python
+# 조합
+def comb(check_idx, s, N, r):
+    """
+    :param check_idx: check에서 채울 idx => 조합할 idx
+    :param s: 선택 구간의 시작점
+    :param N: 전체 크기
+    :param r: 조합으로 고를 갯수
+    :return: 
+    """
+
+    # 다 골랐다면, 탈출!
+    if check_idx == r:
+        print(check)
+
+    else:
+        """
+        s => 남겨진 구간의 시작 idx
+        N-r => 전체 - 고를 조합 수
+        N-r+check_idx => N
+        """
+        # for i in range(s, s+r):
+        #     if i < N:
+        #         check[check_idx] = numbers[i]
+        #         comb(check_idx + 1, i + 1, N, r)
+        for i in range(s, N-r+check_idx+1):
+            check[check_idx] = numbers[i]
+            comb(check_idx+1, i+1, N, r)
+
+
+# 1 ~ 4 자리 수를 갖는 부분 집합 경우의 수
+numbers = [1, 2, 3, 4, 5]
+N = len(numbers)
+for r in range(1, 5):
+    check = [None] * r
+    comb(0, 0, N, r)  # len(numbers) C r
+```
+
+```python
+# 순서가 있는 순열
+def perm(i, n):
+    if i == n:
+        print(*numbers[:n])
+        return
+
+    # 제자리 그대로 부터 마지막 idx까지
+    for j in range(i, N):
+        numbers[i], numbers[j] = numbers[j], numbers[i]
+        perm(i+1, n)
+        numbers[i], numbers[j] = numbers[j], numbers[i]
+
+        
+numbers = [1, 2, 3, 4, 5]
+N = len(numbers)
+perm(0, 3)
+```
+
 
 
 ### 퀵 정렬(Quick Sort)
@@ -171,27 +228,27 @@ get_subsets(0)
 ```python
 # 이해하기 좀더 편한 ver. 
 # python은 신이다.
+# return에 left, right 위치를 바꿔주면 내림차순!
 
-def quicksort(array):
-    N = len(array)
+def quicksort(arr):
+    N = len(arr)
     if N <= 1:
-        return array
-    pivot = N // 2
-    rest = array[:pivot] + array[pivot+1:]
+        return arr
 
-    left = []
-    right = []
+    pivot = arr[0]
 
-    for n in rest:
-        if array[pivot] < n:
-            right.append(n)
+    left, right = [], []
+
+    for idx in range(1, N):
+        if arr[idx] > pivot:
+            right.append(arr[idx])
         else:
-            left.append(n)
+            left.append(arr[idx])
     
     sorted_left = quicksort(left)
     sorted_right = quicksort(right)
 
-    return sorted_left + [array[pivot]] + sorted_right
+    return [*sorted_left, pivot, *sorted_right]
 
 
 numbers = [6, 2, 3, 1, 5, 4]
