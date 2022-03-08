@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block style %}
+<style>
+  div {
+    color: blue;
+  }
+</style>
+{% endblock style %}
+{% block content %}
+<div>
+  <h1>{{ 'happy happy happpppyyyyy lunch!'|title }}</h1>
+  <p>오늘 점심은 {{ today_menu|join:', ' }}!</p>
+  {% for m in menus %}
+    <p>{{ forloop.counter }}번 {{ m }}</p>
+  {% endfor %}
+  {{ today|date:'Y년 m월 d일 (D) A h:i' }}  
+</div>
+{% endblock content %}

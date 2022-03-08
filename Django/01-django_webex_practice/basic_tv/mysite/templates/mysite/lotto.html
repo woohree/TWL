@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>YOUR LUCKY NUMBERS!</h1>
+<ul>
+  {% for number in lucky_numbers %}
+    <p>ㄷㄱㄷㄱㄷㄱㄷㄱ</p>
+    <li>{{ number }}</li>
+  {% endfor %}
+  <p>와! 당첨!</p>
+</ul>
+{% endblock content %}

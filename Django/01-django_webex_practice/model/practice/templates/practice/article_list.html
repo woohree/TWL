@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Play List</h1>
+<ul>
+  {% for data in datas %}
+  <li>
+    <a href="{% url 'practice:article_detail' data.pk %}">{{ data.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}

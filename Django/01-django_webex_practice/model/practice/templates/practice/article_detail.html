@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ data.title }}은(는) {{ data.order }}위입니다!</h1>
+<h2>
+  <p>{{ data.title }} - {{ data.artist }}</p>
+</h2>
+<h3>가사</h3>
+<h4>{{ data.lyrics }}...</h4>
+
+
+<p>{{ data.created_at}} | {{ data.updated_at}}</p>
+
+{% endblock content %}

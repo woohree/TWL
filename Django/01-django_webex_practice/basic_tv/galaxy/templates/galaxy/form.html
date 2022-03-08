@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>섭씨</h1>
+<form action="" method="POST">
+  {% csrf_token %}
+  <label for="f-temp">섭씨: </label>
+  <input type="text" id="f-temp" name="temperature">
+  <button>변환</button>
+</form>
+{% endblock content %}

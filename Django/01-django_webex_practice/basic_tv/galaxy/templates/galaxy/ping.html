@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>ping</h1>
+<form action="{% url 'galaxy:pong' %}" method="POST">
+  {% csrf_token %}
+  <div>
+    <label for="username">USERNAME: </label>
+    <input type="text" id="username" name="username">
+  </div>
+  <div>
+    <label for="password">PASSWORD: </label>
+    <input type="password" id="password" name="password">
+  </div>
+  <div>
+    <input type="submit" value="로그인">
+  </div>
+
+</form>
+{% endblock content %}
