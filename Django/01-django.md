@@ -92,7 +92,7 @@
 
 ## 웹 페이지 흐름
 
-MTV 패턴 그림 흐름과 동일한 흐름
+MTV 패턴 그림 흐름과 동일한 흐름 - CRUD 학습 예시
 
 *01-django_webex_practice 참고*
 
@@ -111,6 +111,24 @@ MTV 패턴 그림 흐름과 동일한 흐름
    cf) `django-extensions`설치 시, `'django_extensions'`등록
 
 7. base 템플릿 (root-folder에)생성 + 등록 `pjt-name/settings.py`에서 `TEMPLATES`의 `DIRS`에 등록 `BASE_DIR / 'templates'`
+
+8. `admin`에 `DB`등록
+
+   ```python
+   # app-name/admin.py
+   from django.contrib import admin
+   from .models import Student, Article
+   
+   admin.site.register(Article)
+   ```
+
+9. `admin`계정 생성
+
+   ```bash
+   $ python manage.py makemigrations    # 이건 사실 필요한 지 정확히 모름
+   $ python manage.py migrate			# 이거 안하면 admin계정 생성 불가
+   $ python manage.py createsuperuser   # admin 계정 생성
+   ```
 
 8. `urls.py`
 
@@ -145,9 +163,8 @@ MTV 패턴 그림 흐름과 동일한 흐름
        path('<int:pk>/edit/', views.article_edit, name='edit'),
        path('<int:pk>/update/', views.article_update, name='update'),
    ]
-   
    ```
-
+   
 9. `views.py`
 
    ```python
@@ -211,8 +228,6 @@ MTV 패턴 그림 흐름과 동일한 흐름
            return redirect('articles:detail', article.pk)
    ```
 
-   
-
 10. `models.py`
 
     ```python
@@ -228,8 +243,6 @@ MTV 패턴 그림 흐름과 동일한 흐름
         def __str__(self):
             return f'{self.pk}) {self.title}'
     ```
-
-    
 
 11. `templates`
 
