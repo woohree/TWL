@@ -1,10 +1,12 @@
 # SQL
 
+- `SQLite3`으로 실습
+
 ## CRUD
 
 ### Create
 
-```sqlite
+```sql
 CREATE TABLE users (
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
@@ -17,7 +19,7 @@ CREATE TABLE users (
 
 ### Read
 
-```sqlite
+```sql
 SELECT * FROM users WHERE age >= 30;
 SELECT first_name FROM users WHERE age >= 30;
 SELECT age, first_name FROM users WHERE age >= 30 and last_name='김';
@@ -43,19 +45,19 @@ SELECT last_name, COUNT(*) AS 수 FROM users GROUP BY last_name;  -- 각 성씨�
 
 ### Update
 
-```sqlite
+```sql
 INSERT INTO users (first_name, last_name) VALUES ('우현', '이');
 ```
 
 ### Delete
 
-```sqlite
+```sql
 DELETE FROM classmates WHERE rowid=7; -- rowid 7 데이터 삭제
 ```
 
 ### `ALTER`
 
-```sqlite
+```sql
 ALTER TABLE articles RENAME TO brandnew_name;  -- 테이블 이름 수정
 -- 1. not null 없이 column 추가
 ALTER TABLE brandnew_name ADD COLUMN created_at TEXT;
