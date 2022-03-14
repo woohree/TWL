@@ -88,11 +88,245 @@
 - 일부 종료 태그가 필요
   - `{% if %} {% endif %}`
 
-## HTML Form
 
 
+## 웹 페이지 흐름
 
-## URL
+MTV 패턴 그림 흐름과 동일한 흐름
 
+*01-django_webex_practice 참고*
 
+1. 가상 환경 만들기 `$ python -m venv venv`
+
+2. 깃 이그노어 생성 `$ touch .gitignore`
+
+3. pip 설치 `$ pip install -r <name>.txt`
+
+4. 프로젝트 폴더 생성 `$ django-admin startproject <pjt-name> .`
+
+5. 앱 생성 `$ python manage.py startapp <app-name>`
+
+6. 앱 등록 `pjt-name/settings.py`에서 `INSTALLED_APPS`에 등록
+
+   cf) `django-extensions`설치 시, `'django_extensions'`등록
+
+7. base 템플릿 (root-folder에)생성 + 등록 `pjt-name/settings.py`에서 `TEMPLATES`의 `DIRS`에 등록 `BASE_DIR / 'templates'`
+
+8. `urls.py`
+
+   ```python
+   # pjt-name/urls.py
+   from django.contrib import admin
+   from django.urls import path, include
+   
+   urlpatterns = [
+       path('admin/', admin.site.urls),
+       path('articles/', include('articles.urls')),
+   ]
+   ```
+
+   ```python
+   # app-name/urls.py
+   from django.urls import path
+   from . import views
+   
+   app_name = 'articles'
+   
+   urlpatterns = [
+       path('', views.article_read, name='read'),
+       
+       path('new/', views.article_new, name='new'),
+       path('create/', views.article_create, name='create'),
+   
+       path('<int:pk>/', views.article_detail, name='detail'),
+   
+       path('<int:pk>/delete/', views.article_delete, name='delete'),
+   
+       path('<int:pk>/edit/', views.article_edit, name='edit'),
+       path('<int:pk>/update/', views.article_update, name='update'),
+   ]
+   
+   ```
+
+9. `views.py`
+
+   ```python
+   from django.shortcuts import render, redirect
+   from .models import Article
+   
+   # Create your views here.
+   def article_read(request):
+       # articles = Article.objects.all()  # 오름차순
+       articles = Article.objects.all().order_by('-pk')  # 내림차순(pk값은 변경가능)
+       context = {
+         'articles': articles,
+       }
+       return render(request, 'articles/article_read.html', context)
+   
+   # 글 작성 버튼을 누르면 /articles/new/
+   # form 제공
+   # form 제출 시 /articles/create/
+   def article_create(request):
+       article = Article()
+       article.title = request.POST['title']
+       article.content = request.POST['content']
+       article.save()
+       return redirect('articles:detail', article.pk)
+   
+   
+   def article_new(request):
+       return render(request, 'articles/article_new.html')
+   
+   
+   def article_detail(request, pk):
+       article = Article.objects.get(pk=pk)
+       context = {
+         'article': article,
+       }
+       return render(request, 'articles/article_detail.html', context)
+   
+   
+   def article_edit(request, pk):
+       article = Article.objects.get(pk=pk)
+       context = {
+         'article': article,
+       }
+       return render(request, 'articles/article_edit.html', context)
+   
+   
+   def article_update(request, pk):
+       article = Article.objects.get(pk=pk)
+       article.title = request.POST['title']
+       article.content = request.POST['content']
+       article.save()
+       return redirect('articles:detail', article.pk)
+   
+   
+   def article_delete(request, pk):
+       article = Article.objects.get(pk=pk)
+       if request.method == 'POST':
+           article.delete()
+           return redirect('articles:read')
+       elif request.method == 'GET':
+           return redirect('articles:detail', article.pk)
+   ```
+
+   
+
+10. `models.py`
+
+    ```python
+    from django.db import models
+    
+    # Create your models here.
+    class Article(models.Model):
+        title = models.CharField(max_length=200)
+        content = models.TextField()
+        created_at = models.DateTimeField(auto_now_add=True)
+        updated_at = models.DateTimeField(auto_now=True)
+    
+        def __str__(self):
+            return f'{self.pk}) {self.title}'
+    ```
+
+    
+
+11. `templates`
+
+    ```django
+    {% comment %} read(게시판) {% endcomment %}
+    
+    {% extends 'base.html' %}
+    {% block content %}
+    <div>
+      <h1>READ</h1>
+    </div>
+    <hr>
+    <div>
+      {% for article in articles %}
+      <div>
+        {{ article.pk }})
+        <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a>
+        <hr>
+      </div>
+      {% endfor %}
+    </div>
+    {% endblock content %}
+    ```
+
+    ```django
+    {% comment %} new(새 글) {% endcomment %}
+    
+    {% extends 'base.html' %}
+    {% block content %}
+    <h1>NEW ARTICLE</h1>
+    <form action="{% url 'articles:create' %}" method='POST'>
+      {% csrf_token %}
+      <div>
+        <label for="title">제목: </label>
+        <input type="text" id='title' name='title'>
+      </div>
+      <div>
+        <label for="content">내용: </label>
+        <textarea name="content" id="content" cols="30" rows="10"></textarea>
+      </div>
+      <div>
+        <button>작성</button>
+      </div>
+    </form>
+    <div>
+      <a href="{% url 'articles:read' %}">BACK</a>
+    </div>
+    {% endblock content %}
+    ```
+
+    ```django
+    {% comment %} detail(상세페이지) {% endcomment %}
+    
+    {% extends 'base.html' %}
+    {% block content %}
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content | linebreaksbr }}</p>
+    <p>{{ article.created_at }} {{ article.updated_at }}</p>
+    <div>
+      <a href="{% url 'articles:edit' article.pk %}">
+        <button>수정</button>
+      </a>
+      <br> 
+      <form action="{% url 'articles:delete' article.pk %}" method='POST'>
+        {% csrf_token %}
+        <button onclick="return confirm('진짜?')">삭제</button>
+      </form>
+    </div>
+    
+    {% endblock content %}
+    ```
+
+    ```django
+    {% comment %} edit(수정) {% endcomment %}
+    
+    {% extends 'base.html' %}
+    {% block content %}
+    <h1>EDIT ARTICLE</h1>
+    <form action="{% url 'articles:update' article.pk %}" method='POST'>
+      {% csrf_token %}
+      <div>
+        <label for="title">제목: </label>
+        <input type="text" id='title' name='title' value="{{ article.title }}">
+      </div>
+      <div>
+        <label for="content">내용: </label>
+        <textarea name="content" id="content" cols="30" rows="10">{{ article.content }}</textarea>
+      </div>
+      <div>
+        <button>수정</button>
+      </div>
+    </form>
+    <div>
+      <a href="{% url 'articles:detail' article.pk %}">BACK</a>
+    </div>
+    {% endblock content %}
+    ```
+
+    
 
