@@ -46,10 +46,10 @@
   ```python
   # Make-Set
   #   a  b  c  d  e  f
-  [0, 1, 2, 3, 4, 3, 6]
+  [0, 1, 2, 3, 4, 5, 5]
   # Union(c, d), Union(c, f)
   #   a  b  c  d  e  f
-  [0, 1, 2, 3, 3, 3, 5]
+  [0, 1, 2, 3, 3, 3, 4]
   # Find
   Find-Set(d)  # c
   Find-Set(e)  # c
@@ -87,12 +87,79 @@
 ![](06-Graph.assets/prim2.png)
 
 ```python
-# 코드
+# 10000 => 최댓값
+def prim1(s):
+    key = [10000] * (V+1)
+    key[s] = 0
+    MST = [0] * (V+1)
+
+    for _ in range(V):
+        min_idx = -1
+        min_V = 10000
+        for i in range(V+1):
+            if not MST[i] and key[i] < min_V:
+                min_V = key[i]
+                min_idx = i
+        MST[min_idx] = 1
+        for v in range(V+1):
+            if not MST[v] and mat[min_idx][v] > 0:
+                key[v] = min(key[v], mat[min_idx][v])
+
+    return sum(key)
+
+
+def prim2(s):
+    MST = [0] * (V+1)                   # MST 포함 여부
+    MST[s] = 1                          # 시작점 체크
+    sum_w = 0                           # 가중치 합
+
+    for _ in range(V):
+        min_idx = 0                     # 최소 가중치 인덱스
+        min_V = 10000                   # 최소 가중치
+        for i in range(V+1):
+            if MST[i] == 1:             # 지금까지 MST에 있고,
+                for j in range(V+1):    # 값이 0과 min_v 사이이며, MST에 포함이 안되어 있다면,
+                    if 0 < mat[i][j] < min_V and not MST[j]:
+                        min_idx = j     # 갱신
+                        min_V = mat[i][j]
+        sum_w += min_V                  # 가중치 합 생긴
+        MST[min_idx] = 1                # MST 갱신
+
+    return sum_w
+
+
+V, E = map(int, input().split())
+mat = [[0]*(V+1) for _ in range(V+1)]
+for _ in range(E):
+    u, v, w = map(int, input().split())
+    mat[u][v] = w
+    mat[v][u] = w
+
+# print(prim1(0))
+print(prim2(0))
+```
+
+```python
+"""
+input
+6 8
+0 1 32
+0 2 31
+0 5 60
+0 6 51
+1 2 21
+2 4 46
+2 6 25
+3 4 34
+3 5 18
+4 5 40
+4 6 51
+"""
 ```
 
 
 
-### KRUSKAL 알고리즘
+### Kruskal 알고리즘
 
 - 간선을 하나씩 선택해서 MST를 찾는 알고리즘
   1. 모든 간선을 가중치에 따라 오름차순으로 정렬
@@ -105,7 +172,39 @@
 ![](06-Graph.assets/kru2.png)
 
 ```python
-# 코드
+def find_set(a):
+    while a != rep[a]:
+        a = rep[a]
+    return a
+
+
+def union(a, b):
+    rep[find_set(b)] = find_set(a)
+
+
+def Kruskal():
+    N = V + 1                       # 정점 수
+    cnt = 0                         # 선택한 edge 수
+    sum_w = 0                       # 가중치 합
+    for w, v, u in edge:
+        if find_set(v) != find_set(u):
+            cnt += 1
+            union(u, v)
+            sum_w += w
+            if cnt == N - 1:        # 간선 수만큼 작업을 끝내면,
+                break               # 끝!
+
+    return sum_w
+
+
+V, E = map(int, input().split())
+edge = []
+for _ in range(E):
+    u, v, w = map(int, input().split())
+    edge.append((w, v, u))
+edge.sort()                         # 가중치(w)로 오름차순 정렬
+rep = [i for i in range(V+1)]       # 대표원소 배열
+print(Kruskal())
 ```
 
 
@@ -132,6 +231,55 @@
 ![](06-Graph.assets/dij3.png)
 
 ```python
-# 코드
+def dijkstra(start, end):
+    D = [0] * (V+1)             # 최단 경로
+    U = [0] * (V+1)             # 비용이 결정된 지점(visited)
+    U[start] = 1
+    for i in range(V+1):
+        D[i] = mat[start][i]
+
+    for _ in range(V):          # 비용이 결정되지 않은 정점 중, D[min_idx]가 최소인 정점 결정
+        min_V = 10000           # 최댓값으로 초기화
+        min_idx = 0
+        for i in range(V+1):
+            if not U[i] and D[i] < min_V:
+                min_V = D[i]
+                min_idx = i
+        U[min_idx] = 1
+        for v in range(V+1):    # 0 < 이동할 수 있는 범위 < 10000
+            if 0 < mat[min_idx][v] < 10000:
+                D[v] = min(D[v], D[min_idx] + mat[min_idx][v])
+
+    return D[end]
+
+
+V, E = map(int, input().split())
+mat = [[10000]*(V+1) for _ in range(V+1)]  # 10000 => 최댓값
+for i in range(V+1):
+    mat[i][i] = 0
+for _ in range(E):
+    u, v, w = map(int, input().split())
+    mat[u][v] = w
+
+ans = dijkstra(0, 3)
+print(ans)
+```
+
+```python
+"""
+input
+5 11
+0 1 3
+0 2 5
+1 2 2
+1 3 6
+2 1 1
+2 3 4
+2 4 6
+3 4 2
+3 5 3
+4 0 3
+4 5 6
+"""
 ```
 
