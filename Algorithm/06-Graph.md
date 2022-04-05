@@ -87,6 +87,38 @@
 ![](06-Graph.assets/prim2.png)
 
 ```python
+# 힙큐를 활용한 프림
+def Prim():
+    visited = [False] * (V+1)                       # 방문 체크 리스트
+    key = [0] + [INF]*V                             # 각 노드에 도달하는 최소 가중치 값
+    hq = [(0, 0)]                                   # 가중치 값, 시작 지점
+
+    while False in visited:
+        k, v = heapq.heappop(hq)
+        visited[v] = True
+        for v2, k2 in graph[v]:
+            if not visited[v2] and k2 < key[v2]:     # 방문하지 않았고, 해당 지점의 값이 최소 가중치 값보다 작다면,
+                key[v2] = k2                         # 갱신
+                heapq.heappush(hq, (k2, v2))
+    return sum(key)
+
+
+T = int(input())
+INF = float('inf')
+for tc in range(1, T + 1):
+    V, E = map(int, input().split())
+    graph = [[] for _ in range(V + 1)]
+    for _ in range(E):
+        n1, n2, w = map(int, input().split())
+        graph[n1].append((n2, w))
+        graph[n2].append((n1, w))
+
+    print(f'#{tc}', Prim())
+```
+
+
+
+```python
 # 10000 => 최댓값
 def prim1(s):
     key = [10000] * (V+1)
@@ -207,7 +239,15 @@ rep = [i for i in range(V+1)]       # 대표원소 배열
 print(Kruskal())
 ```
 
+### 프림 vs 크루스칼
 
+- E: 간선 수, V: 정점 수
+
+- 크루스칼은 **간선이 적은 경우**에 유리하고, `O(ElogE)`
+
+  프림은 **간선이 많은 경우**에 유리하다. `O(ElogV)`
+
+- *ref)* https://ongveloper.tistory.com/376
 
 ## 최단 경로
 
