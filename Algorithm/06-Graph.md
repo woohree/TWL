@@ -17,9 +17,9 @@
 - 교집합이 없음
 - 집합에 속한 하나의 특정 멤버를 통해 각 집합들을 구분, 이를 대표자(representative)라 함
 - 상호배타 집합 연산
-  - Make-Set(x)
-  - Find-Set(x)
-  - Union(x, y)
+  - `Make-Set(x)`
+  - `Find-Set(x)`
+  - `Union(x, y)`
 
 ### 상호배타 집합 표현 - 트리
 
@@ -77,7 +77,7 @@
 
 ### Prim 알고리즘
 
-- 하나의 정점에서 연결된 간선들 중에 하나씩 선택하면서 MST를 만들어 가는 방식
+- 하나의 **정점**에서 연결된 간선들 중에 하나씩 선택하면서 MST를 만들어 가는 방식
   1. 임의 정점을 하나 선택
   2. 선택한 정점과 인접하는 정점들 중 최소 비용 간선으로 이어진 정점을 선택
   3. 모든 정점을 선택할 때까지 반복
@@ -122,7 +122,7 @@ def prim2(s):
                     if 0 < mat[i][j] < min_V and not MST[j]:
                         min_idx = j     # 갱신
                         min_V = mat[i][j]
-        sum_w += min_V                  # 가중치 합 생긴
+        sum_w += min_V                  # 가중치 합 갱신
         MST[min_idx] = 1                # MST 갱신
 
     return sum_w
@@ -159,9 +159,9 @@ input
 
 
 
-### Kruskal 알고리즘
+### Kruskal 알고리즘(간선)
 
-- 간선을 하나씩 선택해서 MST를 찾는 알고리즘
+- **간선**을 하나씩 선택해서 MST를 찾는 알고리즘
   1. 모든 간선을 가중치에 따라 오름차순으로 정렬
   2. 가중치가 가장 낮은 간선부터 선택하면서 트리를 증가시킴
      - 이때, 사이클이 생기면, 다음으로 가중치가 낮은 간선 선택(서로소 집합 이용)
@@ -214,7 +214,7 @@ print(Kruskal())
 - 간선의 가중치가 있는 그래프에서, 두 정점 사이 경로들 중, 간선 가중치 합이 최소인 경로
 - 하나의 시작 정점에서 끝 정점까의 최단 경로
   - 다익스트라 알고리즘(Dijkstra)
-  - 음의 가중치 허용x
+    - 음의 가중치 허용x
   - 벨만-포드 알고리즘(Bellman-Ford)
     - 음의 가중치 허용o
 - 모든 정점들에 대한 최단 경로
@@ -229,6 +229,42 @@ print(Kruskal())
 ![](06-Graph.assets/dij2.png)
 
 ![](06-Graph.assets/dij3.png)
+
+```python
+import heapq
+
+
+# 힙큐 활용 => 다음 노드 찾는 과정 최소화
+def dijkstra(start):
+    hq = []
+    heapq.heappush(hq, (0, start))
+    distances[start] = 0
+
+    while hq:
+        distance, current = heapq.heappop(hq)
+        if distances[current] < distance:
+            continue
+        for new_node, weight in graph[current]:
+            cost = distance + weight
+            if cost < distances[new_node]:
+                distances[new_node] = cost
+                heapq.heappush(hq, (cost, new_node))
+                
+
+INF = float('INF')
+V, E, end = map(int, input().split())
+graph = [[] for _ in range(V+1)]
+visited = [False for _ in range(V+1)]
+distances = [INF for _ in range(V+1)]
+for _ in range(E):
+    s, e, w = map(int, input().split())
+    graph[s].append((e, w))
+
+dijkstra(0)
+print(distances)
+```
+
+
 
 ```python
 def dijkstra(start, end):
