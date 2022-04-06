@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button>GO</button>
+</form>
+<a href="{% url 'articles:index' %}">
+  <button>BACK</button>
+</a>
+{% endblock content %}

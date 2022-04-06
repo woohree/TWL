@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ article.title }}</h1>
+<p>{{ article.content|linebreaksbr }}</p>
+
+<div><a href="{% url 'articles:update' article.pk %}">
+  <button>UPDATE</button>
+</a></div>
+<div>
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <button>DELETE</button>
+  </form>
+</div>
+<div><a href="{% url 'articles:index' %}">
+  <button>BACK</button>
+</a></div>
+
+
+{% endblock content %}

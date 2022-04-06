@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% comment %} action 값이 없어도 동작함, 그러나 가독성을 위해 지우지 말자 {% endcomment %}
+{% block content %}
+  <h1>CREATE</h1>
+  <hr>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+  </form>
+
+  <hr>
+
+  <h1>1. Rendering ~</h1>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    <div>
+      {{ form.title.errors }}
+      {{ form.title.label_tag }}
+      {{ form.title }}
+    </div>
+    <div>
+      {{ form.content.errors }}
+      {{ form.content.label_tag }}
+      {{ form.content }}
+    </div>
+    <input type="submit">
+  </form>
+
+  <hr>
+
+  <h1>2. Looping ~</h1>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+      {% comment %} 에러가 있다면, {% endcomment %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+        {% comment %} 부트스트랩 클래스 지정하고, 그에 맞추어 출력 {% endcomment %}
+          <div class="alert alert-danger">
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {{ field.erroes }}
+      {{ field.label_tag }}
+      {{ field }}
+    </div>
+    {% endfor %}
+    <input type="submit">
+  </form>
+  <a href="{% url 'articles:index' %}">back</a>
+{% endblock content %}
