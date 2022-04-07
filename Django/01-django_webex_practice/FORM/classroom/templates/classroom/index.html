@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="top">
+  <div class="title">서울 5반</div>
+  <div class="subs">
+    <div class="title-sub">ALGO2ITHM STUDY</div>
+    <a class="index-create-a" href="{% url 'classroom:create' %}">
+      <button class="index-create">멤버 추가</button>
+  </div>
+  </a>
+</div>
+
+{% for student in students %}
+  <a class="index-item-title-a" href="{% url 'classroom:detail' student.pk %}">
+    <div class="index-item-title">{{ student.name }}</div>
+  </a>
+
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <div class="title">멤버</div>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button>완료</button>
+  </form>
+  <div class="buttons">
+    <div class="button">
+      <a href="{% url 'classroom:index' %}">
+        <button>뒤로가기</button>
+      </a>
+    </div>
+  </div>
+{% endblock content %}

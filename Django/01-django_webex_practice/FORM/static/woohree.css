@@ -1,0 +1,105 @@
+a { 
+  text-decoration: none;
+}
+
+a:hover {
+  color: gold;
+  border-bottom: 2px solid gold;
+}
+
+.subs {
+  display: flex;
+}
+
+.title {
+  font-size: 5em;
+  margin-bottom: 0.5em;
+}
+
+.title-sub {
+  font-size: 2.5em;
+  font-style: italic;
+}
+
+.index-create-a {
+  margin-top: 1.2em;
+  margin-left: 2em;
+  height: fit-content;
+}
+
+.index-create-a:hover {
+  border: none;
+}
+
+.index-create {
+  font-weight: bold;
+  background-color: skyblue;
+  border: 1.5px solid black;
+}
+
+.index-item-title-a {
+  display: flex;
+  width: fit-content;
+  color: grey;
+}
+
+.index-item-title {
+  display: flex;
+  width: fit-content;
+  font-size: 2em
+}
+
+.index-item-title-a {
+  height: fit-content;
+}
+
+.detail-item-name {
+  font-size: 2em;
+  margin-bottom: 0.7em;
+}
+
+.detail-item {
+  margin-bottom: 5px;
+}
+
+.buttons {
+  margin-top: 20px;
+  padding-top: 1em;
+  border-top: 1.5px solid black;
+}
+
+button {
+  background-color: white;
+  border: 1.5px solid red;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: gold;
+}
+
+.detail {
+  margin-left: 20px;
+}
+
+.detail-item-name {
+  width: fit-content;
+  font-size: 2.5em;
+  border-bottom: 1.5px solid green;
+}
+
+.detail-item {
+  display: flex;
+}
+
+.detail-item-obj {
+  margin-right: 0.5em;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.detail-item-sub {
+  font-size: 1.1em;
+  line-height: 31.2px;
+}

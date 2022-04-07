@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="title">멤버</div>
+  <div class="detail">
+    <div class="detail-item-name">{{ student.name }}</div>
+    <div class="detail-item">
+      <div class="detail-item-obj">나이:</div>
+       <div class="detail-item-sub">{{ student.age }}</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-item-obj">전화번호:</div>
+       <div class="detail-item-sub">{{ student.phone }}</div>
+    </div>    
+    {% if student.is_cs == True %}
+      <div class="detail-item">
+        <div class="detail-item-obj">전공:</div>
+        <div class="detail-item-sub">컴퓨터 공학</div>
+      </div>
+    {% else %}
+    <div class="detail-item">
+      <div class="detail-item-obj">전공:</div>
+       <div class="detail-item-sub">컴공아님</div>
+    </div>
+    {% endif %}
+    <div class="buttons">
+      <div class="button">
+        <a href="{% url 'classroom:update' student.pk %}">
+          <button>수정</button>
+        </a>
+      </div>
+      <div class="button">
+        <form action="{% url 'classroom:delete' student.pk %}" method="POST">
+          {% csrf_token %}
+          <button>삭제</button>
+        </form>
+      </div>
+      <div class="button">
+        <a href="{% url 'classroom:index' %}">
+          <button>뒤로가기</button>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
