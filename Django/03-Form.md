@@ -191,7 +191,7 @@ def update(request, pk):
 
 ### Rendering Fields Manually
 
-```html
+```django
   <h1>Rendering Fields Manually</h1>
   <form action="{% url 'articles:create' %}" method="POST">
     {% csrf_token %}
@@ -213,7 +213,7 @@ def update(request, pk):
 
 ### Looping over the form's fields (`{% for %}`)
 
-```html
+```django
   <h1>Looping over the form's fields</h1>
   <form action="{% url 'articles:create' %}" method="POST">
     {% csrf_token %}
@@ -239,12 +239,22 @@ def update(request, pk):
 {% endblock content %}
 ```
 
-- 참고
+## 참고
 
-  ```python
-  # 아티클에 pk=pk인 값이 있으면, 그대로 진행하고, 없으면 404에러 페이지로 이동
-  # pk를 받아와야하는 함수에서 사용
-  article = get_object_or_404(Article, pk=pk)
-  ```
+```python
+# 아티클에 pk=pk인 값이 있으면, 그대로 진행하고, 없으면 404에러 페이지로 이동
+# pk를 받아와야하는 함수에서 사용
+from django.shortcuts import get_object_or_404
 
-  
+article = get_object_or_404(Article, pk=pk)
+```
+
+```python
+# 데코레이터 => 바로 하단 함수만 영향
+from django.views.decorators.http import require_http_methods, require_POST, require_safe
+
+@require_http_methods(["GET", "POST"])  # 지정한 메소드만 받음, 아니면 405
+@require_POST()						  # POST만
+@require_safe()						  # GET, HEAD만 / require_GET()말고 이거쓰래
+```
+
