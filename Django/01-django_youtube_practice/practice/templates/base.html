@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% if request.user.is_authenticated %}
+    <h3>Hello, {{ user }}</h3>
+    <a href="{% url 'accounts:update' %}">UPDATE</a>
+    <form action="{% url 'accounts:logout' %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="LOGOUT">
+    </form>
+    <form action="{% url 'accounts:delete' %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="DELETE">
+    </form>
+
+  {% else %}
+    <a href="{% url 'accounts:login' %}">LOGIN</a>
+    <a href="{% url 'accounts:signup' %}">SIGNUP</a>
+
+  {% endif %}
+
+  {% block content %}
+  {% endblock content %}
+</body>
+</html>

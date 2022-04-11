@@ -1,10 +1,11 @@
-from django.views.decorators.http import require_http_methods, require_POST
+from django.views.decorators.http import require_http_methods, require_POST, require_safe
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Student
 from .forms import StudentForm
 
 
 # Create your views here.
+@require_safe
 def index(request):
     students = Student.objects.all()
     context = {
@@ -13,6 +14,7 @@ def index(request):
     return render(request, 'classroom/index.html', context)
 
 
+@require_safe
 def detail(request, pk):
     student = get_object_or_404(Student, pk=pk)
     context = {
@@ -21,6 +23,7 @@ def detail(request, pk):
     return render(request, 'classroom/detail.html', context)
 
 
+@require_http_methods(['GET', 'POST'])
 def create(request):
     if request.method == 'POST':
         form = StudentForm(request.POST)

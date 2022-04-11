@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %} 
+<h1>DETAIL</h1>
+<p>{{ article.title }}</p>
+<p>{{ article.content }}</p>
+<hr>
+<a href="{% url 'crud:update' article.pk %}">UPDATE</a>
+<form action="{% url 'crud:delete' article.pk %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="DELETE">
+</form>
+<a href="{% url 'crud:index' %}">BACK</a>
+{% endblock content %}

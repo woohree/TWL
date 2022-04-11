@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+<h1>INDEX</h1>
+<a href="{% url 'crud:create' %}">CREATE</a>
+<br>
+<br>
+{% for article in articles %}
+  {{ article.title }}
+  {{ article.content }}
+  <br>
+  <a href="{% url 'crud:detail' article.pk %}">DETAIL</a>
+  <hr>
+{% endfor %}
+
+{% endblock content %}
