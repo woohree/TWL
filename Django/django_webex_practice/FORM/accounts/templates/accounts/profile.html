@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Profile</h1>
+<h3>{{ profile_user }}'s Profile</h3>
+<div>활동 여부: {{ profile_user.is_active }}</div>
+<div>가입일: {{ profile_user.date_joined }}</div>
+<div>이메일: {{ profile_user.email }}</div>
+<div>이름: {{ profile_user.first_name }}</div>
+<div>성: {{ profile_user.last_name }}</div>
+{% if profile_user == user %}
+  <form action="{% url 'accounts:delete' %}" method="POST">
+    {% csrf_token %}
+    <button>Delete</button>
+  </form>
+  <div>
+    <a href="{% url 'accounts:update' %}"><button>Update</button></a>
+  </div>
+{% endif %}
+
+{% endblock content %}
