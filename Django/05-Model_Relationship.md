@@ -361,3 +361,193 @@ def comment_delete(request, article_pk, comment_pk):
 {% endblock content %}
 ```
 
+
+
+## Model Relationship 3
+
+### M:N 관계
+
+- 1:N의 한계
+
+  - 새로운 예약을 생성하는 것이 불가능 -> 새로운 객체를 생성해야 함
+  - 여러 의사에게 진료받은 기록을 환자 한 명에게 저장할 수 없음 -> 외래 키에 '1, 2'와 같은 형식의 데이터를 사용할 수 없음
+
+  => 중계모델을 통한 M:N 관계
+
+  ![](05-Model_Relationship.assets/중개모델.png)
+
+#### ManyToManyFIeld
+
+- 다대다 관계 설정 시 사용하는 모델 필드
+- 하나의 필수 위치인자(M:N 관계로 설정한 모델 클래스)가 필요
+
+##### related_name
+
+- 관계필드를 가지지 않은 모델이 가진 모델을 참조할 때 사용할 manager의 이름을 설정
+
+##### through
+
+- 중개 테이블을 직접 작성하는 경우, 이 옵션을 사용해 Django모델을 지정할 수 있음
+
+##### symmetrical
+
+- ManyToManyField가 동일한 모델(on self)을 가리키는 경우에 사용
+- 예시) 팔로우 => 유저가 유저를 팔로우, 팔로잉함
+
+##### Realted manager
+
+- add()
+  - 지정한 객체를 관련 객체 **집합**에 추가
+  - 따라서 중복x
+- remove()
+  - 관련 객체 집합에서 지정한 모델 객체를 제거
+
+#### 중개 테이블의 필드 생성 규칙
+
+1. souce model 및 target model이 다른 경우
+   - id / <containing_model>\_id / <other_model>\_id
+2. ManyToManyField가 동일한 모델을 가리키는 경우
+   - id / from\_\<model>\_id / to\_\<model>_id
+
+### 예시) 좋아요!
+
+```python
+# articles/models.py
+from django.db import models
+from django.conf import settings
+
+class Article(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_articles')  # 이름지정안하면, .article_set 명령어가 겹침
+    title = models.CharField(max_length=10)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.content
+```
+
+- article.user: 게시글을 작성한 유저
+- article.like_users: 게시글을 좋아요한 유저
+- user.article_set: 유저가 작성한 게시글
+- user.like_articles: 유저가 좋아요한 게시글
+
+```python
+# articles/views.py
+@require_POST
+def likes(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    # if request.user in article.like_users.all():
+    if request.user.is_authenticated:
+        if article.like_users.filter(pk=request.user.pk).exists():
+            article.like_users.remove(request.user)
+        else:
+            article.like_users.add(request.user)
+        return redirect('articles:index')
+    return redirect('accounts:login')
+```
+
+- exists()
+  - 쿼리셋에 결과가 포함되어 있따면 True, 그 외, False
+
+```django
+<!-- articles/index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Articles</h1>
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'articles:create' %}">CREATE</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[새 글을 작성하려면 로그인 하세요]</a>
+  {% endif %}
+  <hr>
+  {% for article in articles %}
+    <p>작성자: <a href="{% url 'accounts:profile' article.user %}">{{ article.user }}</a></p>
+    <p>글 번호: {{ article.pk }}</p>  
+    <p>글 제목: {{ article.title }}</p>
+    <p>글 내용: {{ article.content }}</p>
+    <div>
+      <form action="{% url 'articles:likes' article.pk %}" method="post">
+        {% csrf_token %}
+        {% if request.user in article.like_users.all %}
+          <input type="submit" value="Like Cancel">
+        {% else %}
+          <input type="submit" value="Like">
+        {% endif %}
+      </form>
+    </div>
+    <a href="{% url 'articles:detail' article.pk %}">DETAIL</a>
+    <hr>
+  {% endfor %}
+{% endblock content %}
+```
+
+### 예시) 프로필 + Followers/Followings
+
+```python
+# accounts/models.py
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
+```
+
+```python
+# accounts/views.py
+def profile(request, username):
+    person = get_object_or_404(get_user_model(), username=username)
+    context = {
+        'person': person,
+    }
+    return render(request, 'accounts/profile.html', context)
+```
+
+```django
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ person.username }}님의 프로필</h1>
+
+{% with followers=person.followers.all followings=person.followings.all %}
+<div>팔로워: {{ followers|length }} / 팔로우: {{ followings|length }}</div>
+{% if request.user != person %}
+<form action="{% url 'accounts:follow' person.pk %}" method="post">
+  {% csrf_token %}
+  {% if request.user in followers %}
+    <input type="submit" value="Unfollow">
+  {% else %}
+    <input type="submit" value="Follow">
+  {% endif %}
+</form>
+{% endif %}
+{% endwith %}
+
+<hr>
+<h2>작성한 게시글</h2>
+{% for article in person.article_set.all %}
+  <p>{{ article.title }}</p>
+{% endfor %}
+<h2>작성한 댓글</h2>
+{% for comment in person.comment_set.all %}
+<p>{{ comment.content }}</p>
+{% endfor %}
+<h2>좋아요 누른 게시글</h2>
+{% for article in person.like_articles.all %}
+  <p>{{ article.title }}</p>  
+{% endfor %}
+{% endblock content %}
+```
+
