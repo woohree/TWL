@@ -36,11 +36,13 @@ def article_create(request):
 @login_required
 @require_safe
 def article_detail(request, article_pk):
+    is_like = request.user.like_articles.filter(pk=article_pk).exists()
     article = get_object_or_404(Article, pk=article_pk)
     form = CommentForm()
     context = {
         'article': article,
         'form': form,
+        'is_like': is_like,
     }
     return render(request, 'articles/article_detail.html', context)
 
@@ -95,3 +97,14 @@ def comment_delete(request, article_pk, comment_pk):
     if request.user == comment.user:
         comment.delete()
     return redirect('articles:article_detail', comment.article.pk)
+
+
+@login_required
+@require_POST
+def article_like(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    if request.user.like_articles.filter(pk=article_pk).exists():
+        article.like_users.remove(request.user)
+    else:
+        article.like_users.add(request.user)
+    return redirect('articles:article_detail', article.pk)

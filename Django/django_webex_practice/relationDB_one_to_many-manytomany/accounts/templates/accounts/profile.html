@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>
+  {{ user1.username }}'s Profile
+  <br>
+  rank: {{ user1.get_rank }}
+  {% if request.user != user1 %}
+  {% if is_follow %}
+  <form action="{% url 'accounts:follow' user1.username %}" method="post">
+    {% csrf_token %}
+    <button>{{ user1.followers.count }}<i class="fa-solid fa-heart"></i></button>
+  </form>
+  {% else %}
+  <form action="{% url 'accounts:follow' user1.username %}" method="post">
+    {% csrf_token %}
+    <button>{{ user1.followers.count }}<i class="fa-regular fa-heart"></i></button>
+  </form>  
+  {% endif %}
+  {% endif %}
+</h1>
+<h2>작성한 글 목록</h2>
+{% for article in user1.articles.all %}
+<a href="{% url 'articles:article_detail' article.pk %}">
+  {{ article.title }}
+</a>
+{% endfor %}
+
+<h2>팔로워: {{ user1.followers.count }} / 팔로우: {{ user1.followings.count }}</h2>
+{% endblock content %}
