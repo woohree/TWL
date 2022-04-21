@@ -439,6 +439,10 @@ def comment_create(request, article_pk):
 
 - 어떤 게시글에 작성하는 댓글인 지에 대한 정보(외래 키)를 `form-data`로 넘겨주지 않았기 때문에, 유효성 검사를 통과하지 못함
 
+- 검증, 저장은 안할건데, JSON 생성은 하고싶다! 인 경우 사용
+
+  - 검증, 저장은 하고, JSON 생성은 안하고싶다! 인 경우 => `write_only_fields`
+
 - `save()` 메소드는 검사 이후
 
 - 이때, 읽기전용 필드(`read_only_fields`)를 통해 직렬화하지 않고 반환 값에만 해당 필드가 포함되도록 할 수 있음
@@ -498,3 +502,15 @@ class ArticleSerializer(serializers.ModelSerializer):
 ```
 
 ​    
+
+## cf
+
+`request.date` => `form-data, query string` 등 다 받아옴
+
+`request.POST` => `form-data + query string`
+
+`request.GET` => `query string`만
+
+`get_list_or_404` => 만약 게시글이 없으면, 에러페이지로 넘어감 => 내 생각에는 ux가 좋지 않아보임
+
+​	해당 메소드에서 `return` => 밑에까지 안감
