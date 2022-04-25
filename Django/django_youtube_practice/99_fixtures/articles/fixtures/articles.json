@@ -1,0 +1,112 @@
+[
+{
+    "model": "articles.article",
+    "pk": 1,
+    "fields": {
+        "user": 9,
+        "title": "Sound your",
+        "content": "Tell sound avoid continue within. Crime goal read chance require. Structure experience meeting movement.\nPaper still bag. Address commercial go doctor.",
+        "created_at": "1981-06-17T17:48:55Z",
+        "updated_at": "1988-09-11T14:54:19Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+        "user": 7,
+        "title": "Choice on ",
+        "content": "Return anything particular central baby. Else manager past up mother. Prove only ready must body dinner discussion. Important experience until occur someone he.",
+        "created_at": "2013-06-08T01:33:51Z",
+        "updated_at": "1975-11-22T19:46:06Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "title": "Everyone f",
+        "content": "Trouble require he. Onto purpose red list debate wrong. Else light under story.\nBuild almost reach blue of address. Opportunity writer group today.",
+        "created_at": "1992-08-28T17:59:38Z",
+        "updated_at": "1990-12-31T07:00:29Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 4,
+    "fields": {
+        "user": 9,
+        "title": "High glass",
+        "content": "South wrong tax power former record memory. Admit it many himself bank wind sea.\nSister north financial including action. Machine full partner school institution interest body.",
+        "created_at": "1982-10-22T18:06:50Z",
+        "updated_at": "1998-07-10T19:44:37Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 5,
+    "fields": {
+        "user": 3,
+        "title": "Simply com",
+        "content": "Business operation reach inside nothing arrive Republican. Trouble understand office matter maintain. Eight watch probably tax certainly place.\nBelieve themselves black return send.",
+        "created_at": "1998-09-05T23:07:23Z",
+        "updated_at": "1995-08-08T14:25:16Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 6,
+    "fields": {
+        "user": 9,
+        "title": "Crime lawy",
+        "content": "Media argue check commercial. Focus knowledge per.\nExperience improve tell they. Space newspaper cause total.\nMe happen send statement thus apply. However past total ten show.",
+        "created_at": "2007-09-06T17:10:43Z",
+        "updated_at": "2021-10-29T19:39:37Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 7,
+    "fields": {
+        "user": 5,
+        "title": "Friend tho",
+        "content": "Leg sign strong present. Southern tax nothing couple issue standard church.\nUsually toward key film term rather. Concern worry clearly near name interest.",
+        "created_at": "2014-11-24T05:24:02Z",
+        "updated_at": "2021-02-14T16:21:58Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 8,
+    "fields": {
+        "user": 3,
+        "title": "Save mind ",
+        "content": "Quite rule kid. Color wrong quality sing. Weight sell run lose out my.",
+        "created_at": "1982-04-05T06:03:18Z",
+        "updated_at": "1977-08-18T12:30:40Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 9,
+    "fields": {
+        "user": 3,
+        "title": "Rule spend",
+        "content": "Win rather concern score recent employee must sort. Billion north wide. Learn so culture understand end edge while. At within around election recent.",
+        "created_at": "2000-06-04T11:11:08Z",
+        "updated_at": "1984-09-11T07:57:25Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 10,
+    "fields": {
+        "user": 8,
+        "title": "Coach too ",
+        "content": "Adult forget student send camera last realize. Material one major.\nAffect several threat section. Range great peace I product. Information field amount pay trade.",
+        "created_at": "2016-05-12T02:15:11Z",
+        "updated_at": "1979-09-01T16:09:57Z"
+    }
+}
+]

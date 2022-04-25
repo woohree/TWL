@@ -1,0 +1,182 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "Form security rich area election its at. Manager eat accept building look identify report.",
+        "last_login": "1974-01-15T17:20:36Z",
+        "is_superuser": false,
+        "username": "ymedina",
+        "first_name": "Karla",
+        "last_name": "Navarro",
+        "email": "shermanerin@example.net",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "House production think soldier.",
+        "last_login": "1983-01-22T08:30:24Z",
+        "is_superuser": true,
+        "username": "johnsondarrell",
+        "first_name": "Lynn",
+        "last_name": "Price",
+        "email": "kevin67@example.net",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "Condition agree ago nothing animal huge.\nThe toward nature floor administration movie.",
+        "last_login": "1987-07-30T16:29:59Z",
+        "is_superuser": true,
+        "username": "rodriguezamy",
+        "first_name": "Amanda",
+        "last_name": "Goodwin",
+        "email": "johnsondorothy@example.org",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "Few very eight challenge go mother. Answer painting result.",
+        "last_login": "1979-04-17T23:21:57Z",
+        "is_superuser": false,
+        "username": "elizabethperez",
+        "first_name": "Hayley",
+        "last_name": "Cunningham",
+        "email": "richard54@example.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "Wall certainly so what soldier although different. Boy conference to forward theory these.",
+        "last_login": "1983-02-07T05:30:53Z",
+        "is_superuser": true,
+        "username": "walkermolly",
+        "first_name": "Patricia",
+        "last_name": "Zimmerman",
+        "email": "johnsclinton@example.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 6,
+    "fields": {
+        "password": "Guess high yet them college. Year play during party. Science stand sign race.",
+        "last_login": "1990-02-10T14:04:21Z",
+        "is_superuser": true,
+        "username": "brittanyandrews",
+        "first_name": "Justin",
+        "last_name": "Morris",
+        "email": "robert34@example.net",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 7,
+    "fields": {
+        "password": "Run pay writer mouth. School ball not fast address computer person where.",
+        "last_login": "1971-01-03T09:14:08Z",
+        "is_superuser": false,
+        "username": "erin35",
+        "first_name": "Debra",
+        "last_name": "Schultz",
+        "email": "amandacallahan@example.org",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 8,
+    "fields": {
+        "password": "Rich kitchen modern knowledge along stage leave choice. Number economic worker peace skin.",
+        "last_login": "2001-01-28T18:05:42Z",
+        "is_superuser": false,
+        "username": "barnesthomas",
+        "first_name": "Alexander",
+        "last_name": "Perry",
+        "email": "lmooney@example.org",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 9,
+    "fields": {
+        "password": "Role consider such significant news avoid. Arm old employee possible dark box. Even every will age.",
+        "last_login": "1988-01-22T22:50:31Z",
+        "is_superuser": false,
+        "username": "rgibbs",
+        "first_name": "Brandon",
+        "last_name": "Anderson",
+        "email": "robert05@example.net",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 10,
+    "fields": {
+        "password": "Five need very low. Us reach sell note who character language.",
+        "last_login": "1999-11-10T12:35:11Z",
+        "is_superuser": true,
+        "username": "jessicawalker",
+        "first_name": "Elizabeth",
+        "last_name": "Rios",
+        "email": "colonstephanie@example.net",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-04-22T01:13:58.300Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
