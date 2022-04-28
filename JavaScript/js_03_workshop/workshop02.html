@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app"></div>
+
+  <script>
+    // div#app 요소 선택
+    const app = document.querySelector('#app')
+    
+    // h1 태그를 createElement 로 생성
+    const h1 = document.createElement('h1')
+
+    // 생성한 h1태그의 내용을 '오늘의 Todo' 로 설정
+    h1.innerText = '오늘의 Todo'
+
+    // ul, li 태그들을 생성 및 내용 추가
+    const ul = document.createElement('ul')
+    // const li1 = document.createElement('li')
+    // const li2 = document.createElement('li')
+    // const li3 = document.createElement('li')
+    // li1.innerText = '양치하기'
+    // li2.innerText = '공부하기'
+    // li3.innerText = '휴식하기'
+    // ul.append(li1, li2, li3)
+
+
+    const mLst = ['양치하기', '공부하기', '휴식하기']
+    mLst.forEach(message => {
+      const li = document.createElement('li')
+      li.innerText = message
+      ul.append(li)
+    })
+    
+    // for (i=0; i<3; i++) {
+    //   const li = document.createElement('li')
+    //   li.innerText = mLst[i]
+    //   ul.append(li)
+    // }
+
+
+    // 각 태그들을 적절하기 div#app 요소에 자식요소로 추가. (#app > ul > li)
+    app.append(h1, ul)
+
+  </script>
+</body>
+
+</html>

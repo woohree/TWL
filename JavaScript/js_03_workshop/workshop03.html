@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="container">
+    <div>
+      <button id="button" class="btn btn-primary">
+        카드 생성!
+      </button>
+    </div>
+
+    <section id="cardsSection" class="row">
+
+      <!-- 카드 예시 -->
+      <article class="col-4">
+        <div class="card m-1">
+          <div class="card-body">
+            <h5 class="card-title">Example</h5>
+            <p class="card-text">This is a card example.</p>
+          </div>
+        </div>
+      </article>
+      <!-- 카드 예시 -->
+
+      <!-- JS로 위와 동일한 카드를 생성하여 section#cardSection의 자식으로 추가 -->
+    </section>
+
+  </div>
+
+  <script>
+    // section#cardSection에 예시와 같은 카드를 생성하여 추가하는 코드를 작성하시오.
+    const cardsSection = document.querySelector('#cardsSection')
+
+    function createCard(event, title='test', content='testContent') {
+      // 여기에 카드를 작성하시오.
+      const articleCol4 = document.createElement('article')
+      articleCol4.classList.add('col-4')
+
+      const cardM1 = document.createElement('div')
+      cardM1.classList.add('card', 'm-1')
+
+      const cardBody = document.createElement('div')
+      cardBody.classList.add('card-body')
+
+      const cardTitle = document.createElement('h5')
+      cardTitle.classList.add('card-title')
+      cardTitle.innerText = title
+      
+      const cardText = document.createElement('p')
+      cardText.classList.add('card-text')
+      cardText.innerText = content
+
+      articleCol4.append(cardM1)
+      cardM1.append(cardBody)
+      cardBody.append(cardTitle, cardText)
+      
+      // DOM에 추가
+      cardsSection.appendChild(articleCol4)
+      
+    }
+
+    // 카드 생성
+    // const newCard = createCard('Hello', 'World')
+    const button = document.querySelector('#button')
+    button.addEventListener('click', createCard)
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>preventDefault</title>
+	<style>
+    body {
+      height: 10000px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 1. checkbox -->
+  <input type="checkbox" id="my-checkbox">
+  <hr>
+
+  <!-- 2. submit -->
+  <form action="/articles/" id="my-form">
+    <input type="text">
+    <input type="submit" value="제출!">
+  </form>
+  <hr>
+
+  <!-- 3. link -->
+  <a href="https://google.com/" target="_blank" id="my-link">GoToGoogle</a>
+  <hr>
+  
+  <script>
+    // 1
+    const checkBox = document.querySelector('#my-checkbox')
+    
+    checkBox.addEventListener('click', function (event) {
+      event.preventDefault()
+      console.log(event)
+    })
+
+    // 2
+    const formTag = document.querySelector('#my-form')
+
+    formTag.addEventListener('submit', function (event) {
+      console.log(event)
+      event.preventDefault()
+      event.target.reset()
+    })
+
+    // 3
+    const aTag = document.querySelector('#my-link')
+
+    aTag.addEventListener('click', function (event) {
+      console.log(event)
+      event.preventDefault()
+    })
+
+    // 4
+    document.addEventListener('scroll', function (event) {
+      console.log(event)
+      event.preventDefault()
+    })
+  </script>
+</body>
+</html>

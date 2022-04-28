@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .ssafy-location {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello SSAFY</h1>
+  <h2 id="location-header">Location</h2>
+  <div>
+    <ul>
+      <li class="ssafy-location">서울</li>
+      <li class="ssafy-location">대전</li>
+      <li class="ssafy-location">광주</li>
+      <li class="ssafy-location">구미</li>
+      <li class="ssafy-location">부울경</li>
+    </ul>
+  </div>
+  <script>
+    // 실습 코드 목록
+    // 한 줄씩 복사하여 개발자 도구에 붙여넣기
+
+    // 1. Selection
+    // 1-1. window & document
+    console.log(window)
+    console.log(document)
+    console.log(window.document)
+
+    // 1-2. querySelector
+    const h1 = document.querySelector('h1')
+    const h2 = document.querySelector('h2')
+    const secondH2 = document.querySelector('#location-header')
+    const selectUlTag = document.querySelector('div > ul')
+
+    // 1-3. querySelectorAll
+    const liTags = document.querySelectorAll('li')
+    const secondLiTags = document.querySelectorAll('.ssafy-location')
+
+    // 2. Creation & Append
+    // 2-1. createElement
+    const ulTag = document.querySelector('ul')
+    const newLiTag = document.createElement('li')
+
+    // 2-2. append
+    const ulTag = document.querySelector('ul')
+    const newLiTag = document.createElement('li')
+    newLiTag.innerText = '새로운 리스트 태그'
+    ulTag.append(newLiTag)
+    ulTag.append('문자열도 추가 가능')
+
+    const new1 = document.createElement('li')
+    new1.innerText = '리스트 1'
+    const new2 = document.createElement('li')
+    new2.innerText = '리스트 2'
+    const new3 = document.createElement('li')
+    new3.innerText = '리스트 3'
+    ulTag.append(new1, new2, new3)
+    
+    // 2-3. appendChild
+    const ulTag = document.querySelector('ul')
+    const newLiTag = document.createElement('li')
+    newLiTag.innerText = '새로운 리스트 태그'
+    ulTag.appendChild(newLiTag)
+    ulTag.appendChild('문자열은 추가 불가')
+
+    const new1 = document.createElement('li')
+    new1.innerText = '리스트 1'
+    const new2 = document.createElement('li')
+    new2.innerText = '리스트 2'
+    ulTag.appendChild(new1, new2)
+
+    // 2-2. innerText & innerHTML
+    const ulTag = document.querySelector('ul')
+    const liTag1 = document.createElement('li')
+    liTag1.innerText = '<li>춘천</li>'
+    const liTag2 = document.createElement('li')
+    liTag2.innerHTML = '<li>춘천</li>'
+    ulTag.append(liTag1, liTag2)
+
+    const ulTag = document.querySelector('ul')
+    ulTag.innerHTML = '<li><a href="javascript:alert(\'당신의 개인정보 유출\')">춘천</a></li>'
+
+
+    // 3. Delete
+    // 3-1. remove
+    const header = document.querySelector('#location-header')
+    header.remove()
+
+    // 3-2. removeChild
+    const parent = document.querySelector('ul')
+    const child = document.querySelector('ul > li')
+    const removedChild = parent.removeChild(child)
+    console.log(removedChild)
+
+    // 4. 속성
+    // 4-1. setAttribute
+    const header = document.querySelector('#location-header')
+    header.setAttribute('class', 'ssafy-location')
+
+    // 4-2. getAttribute
+    const getAttr = document.querySelector('.ssafy-location')
+    getAttr.getAttribute('class')
+    getAttr.getAttribute('style')
+
+    //2-5. Element Styling
+    li1.style.cursor = 'pointer'
+    li2.style.color = 'blue'
+    li3.style.background = 'red'
+  </script>
+</body>
+</html>

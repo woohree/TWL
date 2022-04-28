@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .text-decoration-none {
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <a id="anchor" href="">GOOGLE</a>
+
+  <script>
+
+    /*
+      JavaScript 코드만을 활용하여 a#anchor 요소를 아래와 같이 수정합니다.
+        1) a 태그에 text-decoration-none 클래스를 추가합니다.
+        2) a 태그의 href 속성은 https://google.com/ 입니다.
+        3) a 태그의 target 속성은 _blank 입니다. (새 탭에서 열기)
+    */
+
+    const anchor = document.querySelector('#anchor')
+    anchor.classList.add('text-decoration-none')
+    anchor.href = 'https://google.com/'
+    anchor.target = '_blank'
+
+    // anchor.setAttribute('class', 'text-decoration-none')
+    // anchor.setAttribute('href', 'https://google.com/')
+    // anchor.setAttribute('target', '_blank')
+
+  </script>
+</body>
+
+</html>
