@@ -11,18 +11,30 @@
 ### 상속 구조
 
 - EventTarget
-  - Event Listener를 가질 수 있는 객체가 구현하는 DOM 인터페이스
-- Node
-  - 여러 DOM 타입들이 상속하는 인터페이스
-- Element
-  - Document 안의 모든 객체가 상속하는 가장 범용적인 인터페이스 
-  - 부모인 Node와 그 부모인 EventTarget의 속성을 상속
-- Document
-  - 브라우저가 불러온 웹 페이지를 나타냄
-  - DOM 트리의 진입점(entry point) 역할을 수행
-- HTMLElement
-  - 모든 종류의 HTML 요소
-  - 부모 element의 속성 상속
+  
+  Event Listener를 가질 수 있는 객체가 구현하는 DOM 인터페이스
+  
+  - Node
+  
+    여러 DOM 타입들이 상속하는 인터페이스
+  
+    - Element
+  
+      Document 안의 모든 객체가 상속하는 가장 범용적인 인터페이스 
+  
+      부모인 Node와 그 부모인 EventTarget의 속성을 상속
+  
+    - Document
+  
+      브라우저가 불러온 웹 페이지를 나타냄
+  
+      DOM 트리의 진입점(entry point) 역할을 수행
+  
+      - HTMLElement
+  
+        모든 종류의 HTML 요소
+  
+        부모 element의 속성 상속
 
 ### DOM 선택 메소드
 
@@ -33,8 +45,11 @@
   - 제공한 선택자와 일치하는 여러 element를 선택
   - 매칭할 하나 이상의 셀렉터를 포함하는 유효한 CSS selector를 인자(문자열)로 받음
   - 지정한 셀렉터에 일치하는 NodeList를 반환
-- id => `'#id'`
-- class => `'.class'`
+- getElementById(), getElementTagName() 말고 위 메소드를 쓰는 이유
+  - id, class, tag 선택자 등을 모두 사용 가능하므로, 더 구체적이고 유연한 선택이 가능
+  - id => `'#id'`
+  - class => `'.class'`
+
 
 ### DOM 변경 메소드
 
@@ -55,9 +70,15 @@
 - `Node.innerText`
   - Node 객체와 그 자손의 텍스트 컨텐츠(DOMString)를 표현
   - 즉, 줄 바꿈을 인식하고 숨겨진 내용을 무시하는 등 최종적으로 스타일링이 적용된 모습으로 표현
+  
 - `Element.innerHTML`
   - 요소 내에 포함된 HTML 마크업을 반환
   - XSS 공격에 취약하므로 사용 x
+  
+  - *cf) XSS(Cross-site Scripting)*
+    - 공격자가 입력요소를 사용하여(\<input>)웹 사이트 클라이언트 측 코드에 악성 스크립트를 삽입해 공격하는 방법
+    - 피해자(사용자)의 브라우저가 악성 스크립트를 실행하며 공격자가 엑세스 제어를 우회하고 사용자를 가장할 수 있도록 함
+  
 - ![image-20220427113345815](02-DOM.assets/image-20220427113345815.png)
 
 ### DOM 삭제 메소드

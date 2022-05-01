@@ -365,11 +365,18 @@ for (let fruit of fruits) {
 
 #### ES6 추가 문법
 
-- 객체를 정의할 때,` key`와 `value`명이 같다면 축약 가능
+- 객체를 정의할 때,` key`와 `value`명이 **같다**면 축약 가능
 
-  - `books: books => books`
+  - ```js
+    // books: books => books
+    const me = {
+        name,
+        books,
+        age
+    }
+    ```
 
-- 메소드 선언 시 `function` 키워드 생략 가능
+    메소드 선언 시 `function` 키워드 생략 가능
 
   - ```javascript
     // 객체 내부
@@ -398,6 +405,13 @@ for (let fruit of fruits) {
           size: 29930
     }
     
+    // 변수 할당에서도 가능
+    const name = savedFile.name
+    const { name } = savedFile
+    const { name, extension, size } = savedFile
+    
+    
+    // 함수에서도 가능
     function fileSummary({ name, extension, size }) {
           console.log(`The file ${name}.${extension} is size of ${size} bytes.`)
     }
@@ -420,8 +434,8 @@ for (let fruit of fruits) {
     - 생성되는 객체를 가리킴(`python`의 `self`와 유사)
   - 메서드
     - 해당 메서드가 소속된 객체를 가리킴
-
   - 위 두가지 경우를 제외하면, 모두 최상위 객체(`window`)를 가리킴
+  - `화살표 함수`를 쓰면, `bind(this)` 포함이라 생각해도 됨, 함수 내부에 `this` 키워드가 있다면 일반 `function`과 `화살표 함수`의 차이가 나타남
 
 ![image-20220426175838379](01.assets/image-20220426175838379.png)
 

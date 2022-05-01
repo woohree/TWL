@@ -98,7 +98,7 @@ SELECT OUTS.ANIMAL_ID, OUTS.NAME FROM ANIMAL_INS INS RIGHT JOIN ANIMAL_OUTS OUTS
 -- 아직 입양을 못 간 동물 중, 가장 오래 보호소에 있었던 동물 3마리의 이름과 보호 시작일을 조회하는 SQL문을 작성해주세요. 이때 결과는 보호 시작일 순으로 조회해야 합니다.
 SELECT INS.NAME, INS.DATETIME FROM ANIMAL_INS INS LEFT JOIN ANIMAL_OUTS OUTS ON INS.ANIMAL_ID = OUTS.ANIMAL_ID WHERE OUTS.ANIMAL_ID IS NULL ORDER BY INS.DATETIME LIMIT 3
 
--- 보호소에 들어올 당시에는 중성화1되지 않았지만, 보호소를 나갈 당시에는 중성화된 동물의 아이디와 생물 종, 이름을 조회하는 아이디 순으로 조회하는 SQL 문을 작성해주세요.
+-- 보호소에 들어올 당시에는 중성화되지 않았지만, 보호소를 나갈 당시에는 중성화된 동물의 아이디와 생물 종, 이름을 조회하는 아이디 순으로 조회하는 SQL 문을 작성해주세요.
 SELECT OUTS.ANIMAL_ID, OUTS.ANIMAL_TYPE, OUTS.NAME FROM ANIMAL_OUTS OUTS LEFT JOIN ANIMAL_INS INS ON OUTS.ANIMAL_ID = INS.ANIMAL_ID WHERE INS.SEX_UPON_INTAKE != OUTS.SEX_UPON_OUTCOME ORDER BY OUTS.ANIMAL_ID
 
 -- 동물 보호소에 들어온 동물 중 이름이 Lucy, Ella, Pickle, Rogan, Sabrina, Mitty인 동물의 아이디와 이름, 성별 및 중성화 여부를 조회하는 SQL 문을 작성해주세요.
@@ -135,7 +135,6 @@ FROM employee
 
 -- TIMESTAMPDIFF(단위, 날짜1, 날짜2);
 -- CHAR_LENGTH(문자열);
-
 
 ```
 
