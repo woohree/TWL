@@ -320,7 +320,7 @@ for (let fruit of fruits) {
 
 ### 문자열
 
-- `include` - 특정 문자열의 존재여부를 참/거짓으로 반환
+- `includes` - 특정 문자열의 존재여부를 참/거짓으로 반환
 - `split` - 문자열을 토큰 기준으로 나눈 배열 반환
 - `replace` - 해당 문자열을 대상 문자열로 교체해 반환
 - `trim` - 문자열의 좌우 공백 제거해 반환(`trimStart, trimEnd`)
@@ -357,7 +357,7 @@ for (let fruit of fruits) {
 
 ### 객체
 
-- 객체는 속성의 집합이며, 중괄호 내부에 `key`와 `value`의 상으로 표현
+- 객체는 속성의 집합이며, 중괄호 내부에 `key`와 `value`의 쌍으로 표현
 - `key`는 문자열만 가능
 - `value`는 모든 타입 가능(함수도 포함)
 - 요소 접근은 점 또는 대괄호로 가능 => `obj.name or obj['name']`

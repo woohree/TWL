@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const URL = 'https://dog.ceo/api'
+
+    function fetchDogImages() {
+      axios.get(URL + '/breeds/list/all')
+        .then(res => {
+          const breedObj= res.data.message
+          const breedArray = Object.keys(breedObj)
+          const breed = breedArray[0]  // 아펜핀셔
+          return axios.get(URL + `/breed/${breed}/images`)
+        })
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err))
+    }
+    
+    fetchDogImages()
+
+
+    /* 
+      0. async-await를 사용하려면, 함수로 묶어야 한다.
+      1. 해당 함수 맨 앞에 async 라는 키워드로 표시를 남긴다.
+      2. 함수 블록 내부에, 비동기로 동작하는 함수들을 찾아서 앞에 await를 남긴다.
+    */
+    async function fetchDogImages() {
+      const res = await axios.get(URL + '/breeds/list/all')
+      const breedObj= res.data.message
+      const breedArray = Object.keys(breedObj)
+      const breed = breedArray[0]  // 아펜핀셔
+      const images = await axios.get(URL + `/breed/${breed}/images`)
+      console.log(images)
+    }
+
+    fetchDogImages()
+      .catch(err => console.error(err))
+  </script>
+  
+</body>
+</html>

@@ -45,7 +45,7 @@
   - 제공한 선택자와 일치하는 여러 element를 선택
   - 매칭할 하나 이상의 셀렉터를 포함하는 유효한 CSS selector를 인자(문자열)로 받음
   - 지정한 셀렉터에 일치하는 NodeList를 반환
-- getElementById(), getElementTagName() 말고 위 메소드를 쓰는 이유
+- `getElementById(), getElementTagName()` 말고 위 메소드를 쓰는 이유
   - id, class, tag 선택자 등을 모두 사용 가능하므로, 더 구체적이고 유연한 선택이 가능
   - id => `'#id'`
   - class => `'.class'`
