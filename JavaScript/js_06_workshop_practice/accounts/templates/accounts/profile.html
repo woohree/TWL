@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ person.username }}의 프로필 페이지</h1>
+  {% with followings=person.followings.all followers=person.followers.all %}
+    <div>
+      <div id="numbers">팔로잉 수 : {{ followings|length }} / 팔로워 수 : {{ followers|length }}</div>
+      
+    </div>
+    {% if user != person %}
+      <div>
+        <form id="followForm">
+          {% csrf_token %}
+          {% if user in followers %}
+            <input id="followButton" type="submit" value="언팔로우">
+          {% else %}
+            <input id="followButton" type="submit" value="팔로우">
+          {% endif %}
+        </form>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <hr>
+
+  <h2>{{ person.username }}가 작성한 게시글</h2>
+  {% for article in person.article_set.all %}
+    <div>{{ article.title }}</div>
+  {% endfor %}
+
+  <hr>
+
+  <h2>{{ person.username }}가 작성한 댓글</h2>
+  {% for comment in person.comment_set.all %}
+    <div>{{ comment.content }}</div>
+  {% endfor %}
+
+  <hr>
+
+  <h2>{{ person.username }}가 좋아요를 누른 게시글</h2>
+  {% for article in person.like_articles.all %}
+    <div>{{ article.title }}</div>
+  {% endfor %}
+
+  <a href="{% url 'articles:index' %}">[back]</a>
+  
+{% endblock content %}
+
+{% block script %}
+<script>
+  /*
+    1. 팔로우 버튼 클릭하면
+    2. url로 포스트 요청보냄 => db에 좋아요 기록
+    3. 응답 json을 통해 화면 갱신
+  */
+
+  // const FOLLOW_URL = `{% url 'accounts:follow' person.id %}`
+  const personId = `{{ person.id }}`
+  const FOLLOW_URL = `/accounts/${personId}/follow/`
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+  const form = document.querySelector('#followForm')
+  const numbers = document.querySelector('#numbers')
+  const followButton = document.querySelector('#followButton')
+  // const followButton = document.querySelector('#followForm > input[type=submit]')
+
+  form.addEventListener('submit', event => {
+    event.preventDefault()
+    axios({
+      method: 'post',
+      url: FOLLOW_URL,
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    })
+      .then(res => {
+        numbers.innerText = `팔로잉 수 : ${ res.data.followingCount } / 팔로워 수 : ${ res.data.followerCount }`
+
+        followButton.value = res.data.isFollowing ? '팔로우' : '언팔로우'
+      })
+      .catch(err => console.error(err))
+  })
+
+
+</script>
+{% endblock script %}

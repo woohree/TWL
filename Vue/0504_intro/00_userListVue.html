@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue.js</title>
+</head>
+<body>
+  <!-- MVVM - View -->
+  <!-- <p>{{ message }}</p> -->
+  <div id="app">
+    <!-- <p>{{ message }}</p> -->
+    <label for="inputArea">userName: </label>
+    <input v-on:input="onInputChange" type="text" id="inputArea">
+    <hr>
+    <!-- 3. DOM이 update(re-render) -->
+    <h1>안녕하세요 {{ userName }}</h1>
+
+    <div>
+      {{ userName }} 님의 친구 목록
+    </div>
+
+    <div>
+      {{ userName }} 님의 알림 목록
+    </div>
+
+    <div>
+      {{ userName }} 님의 친구 요청 목록
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // MVVM - ViewModel
+    const app = new Vue({
+      //1. DOM과 data 연결
+      el: '#app',
+      // MVVM - Model
+      data: {
+        userName: 'Unknown',
+        message: 'Hello Vue.js',
+      },
+      //2. Data가 바뀌면 
+      methods: {
+        onInputChange: function (event) {
+          this.userName = event.target.value
+        }
+      }
+    })
+  </script>
+</body>
+</html>

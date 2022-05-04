@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Part1</title>
+  <style>
+    .dark-mode {
+      background-color: rgb(24, 22, 22);
+      color: white;
+    }
+    .light-mode {
+      background-color: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1 >{{ h1Message }}</h1>
+
+    <button @click="switchTheme">{{ buttonMessage }}</button>
+    <div>
+      <button @click="plus">+</button>
+      <button @click="minus">-</button>
+    </div>
+
+    <div :class="darkMode ? 'dark-mode' : 'light-mode'">
+      <ul>
+        <li v-for="article in articles" :style="{ fontSize: fontSize + 'px'}">
+          <strong>{{ article.title }}</strong>: {{ article.content }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        darkMode: true,
+        fontSize: 30,
+        articles: [
+          { id: 1, title: 'helloooo', content: 'gg~~' },
+          { id: 2, title: 'helloooo2', content: 'gg~~2' },
+          { id: 3, title: 'helloooo3', content: 'gg~~3' },
+        ]
+      },
+      methods: {
+        switchTheme() {
+          this.darkMode = !this.darkMode
+        },
+        plus() {
+          this.fontSize++
+        },
+        minus() {
+          this.fontSize--
+        }
+      },
+      computed: { // data를 기반으로 계산된 속성
+        buttonMessage() {
+          return this.darkMode ? 'Light-mode' : 'Dark-mode'
+        },
+        h1Message() {
+          return this.darkMode ? 'Dark Mode' : 'Light Mode'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

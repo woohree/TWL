@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="r">
+    <p>{{ r }}</p>
+    <p>{{ area }}</p>
+    <p>{{ perimeter }}</p>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        r: 2,
+      },
+      computed: {
+        area() {
+          return this.r**2 * 3.14
+        },
+        perimeter() {
+          return this.r * 2 * 3.14
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

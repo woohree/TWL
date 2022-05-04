@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>Input -> Data</h2>
+    <p>{{ msg1 }}</p>
+    <input id="box" @input="onInputChange" type="text">
+    <hr>
+
+    <h2>Input <-> Data</h2>
+    <p>{{ msg2 }}</p>
+    <input v-model="msg2" type="text">
+    <hr>
+    <input v-model="checked" type="checkbox">
+    <label for="box">{{ checked }}</label>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        msg1: '111',
+        msg2: '222',
+        checked: true,
+      },
+      methods: {
+        onInputChange(event) {
+          this.msg1 = event.target.value
+        }
+      }
+    })
+  </script>
+</body>
+</html>

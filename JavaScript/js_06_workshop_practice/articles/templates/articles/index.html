@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Articles</h1>
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'articles:create' %}">[CREATE]</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[새 글을 작성하려면 로그인하세요.]</a>
+  {% endif %}
+  <hr>
+  {% for article in articles %}
+    <p>작성자 : 
+      <a href="{% url 'accounts:profile' article.user.username %}">{{ article.user }}</a>
+    </p>
+    <p>글 번호 : {{ article.pk }}</p>
+    <p>글 제목 : {{ article.title }}</p>
+    <p>글 내용 : {{ article.content }}</p>
+    <div>
+      <form class="like-form" data-article-id="{{ article.pk }}">
+        {% csrf_token %}
+        {% if user in article.like_users.all %}
+          <button id="like-{{ article.pk }}">좋아요 취소</button>
+        {% else %}
+          <button id="like-{{ article.pk }}">좋아요</button>
+        {% endif %}
+      </form>
+      <p>
+        <span id="like-count-{{ article.pk }}">
+          {{ article.like_users.all|length }}
+        </span>
+        명이 이 글을 좋아합니다.
+      </p>
+    </div>
+    <a href="{% url 'articles:detail' article.pk %}">[DETAIL]</a>
+    <hr>
+  {% endfor %}
+{% endblock content %}
+
+{% block script %}
+  <script>
+    const likeForms = document.querySelectorAll('.like-form')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    const likeText = document.querySelector('#likeText')
+    
+    likeForms.forEach(likeForm => {
+      likeForm.addEventListener('submit', event => {
+        event.preventDefault()
+        const articlePk = event.target.dataset.articleId
+        const likeNumber = document.querySelector(`#like-count-${articlePk}`)
+        const likeButton = document.querySelector(`#like-${articlePk}`)
+
+        axios({
+          method: 'post',
+          url: `/articles/${articlePk}/likes/`,
+          headers: {
+            'X-CSRFToken': csrftoken
+          }
+        })
+          .then(res => {
+            if (res.data.isLogin) {
+              likeNumber.innerText = res.data.likeCount
+              likeButton.innerText = res.data.isLike ? '좋아요' : '좋아요 취소'
+            } else {
+              window.location = res.data.url
+            }
+          })
+          .catch(err => console.error(err))
+      })
+    })
+  </script>
+{% endblock script %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+
+    .my-background-color {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 속성 바인딩 -->
+    <img v-bind:src="imageSrc" alt="">
+    <img :src="imageSrc" alt="">
+    <hr>
+
+    <!-- 클래스 바인딩 -->
+    <div :class="{ active: isRed }">클래스 바인딩</div>
+    <hr>
+    <h3 :class="[activeRed, myBackground]">hello vue</h3>
+    <!-- 스타일 바인딩 -->
+    <p :style="{ fontSize: fontSize + 'px' }">this is parag</p>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        fontSize: 16,
+        imageSrc: '123456',
+        isRed: true,
+        activeRed: 'active',
+        myBackground: 'my-background-color'
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Quick Start</title>
+</head>
+<body>
+  <!-- 2. 선언적 렌더링 -->
+  <h2>선언적 렌더링</h2>
+  <div id="app1">
+    {{ message }}
+  </div>
+
+  <!-- 3. 엘리멘트 속성 바인딩 -->
+  <h2>Element 속성 바인딩</h2>
+  <div id="app2">
+    {{ message }}
+  </div>
+  <!-- 4. 조건 -->
+  <h2>조건</h2>
+  <div id="app3">
+    <p v-if="seen">보인다</p>
+    <!-- <p>안보인다</p> -->
+  </div>
+  <!-- 5. 반복 -->
+  <h2>반복</h2>
+  <div id="app4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+  <!-- 6. 사용자 입력 핸들링 -->
+  <h2>사용자 입력 핸들링</h2>
+  <div id="app5">
+    <p>{{ message }}</p>
+    <input v-model="message" type="text">
+    <button v-on:click="reverseMessage">거꾸로!</button>
+  </div>
+  <!-- 1. Vue CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  
+  <script>
+    // 2. 선언적 렌더링
+    const app1 = new Vue({
+      el: '#app1',
+      data: {
+        message: 'hihi'
+      }
+    })
+    // 3. 엘리먼트 속성 바인딩
+    const app2 = new Vue({
+      el: '#app2',
+      data: {
+        message: `아 몰라요 몰라~ ${new Date()}`
+      }
+    })
+    // 4. 조건
+    const app3 = new Vue({
+      el: '#app3',
+      data: {
+        seen: false,
+      }
+    })
+    // 5. 반복
+    const app4 = new Vue({
+      el: '#app4',
+      data: {
+        todos: [
+          { text: 'jsjs' },
+          { text: 'vue' },
+          {text: '몰라' },
+        ]
+      }
+    })
+    // 6. 사용자 입력 핸들링
+    const app5 = new Vue({
+      el: '#app5',
+      data: {
+        message: 'ㅎㅇㅎㅇ'
+      },
+      methods: {
+        reverseMessage() {  // 이거 메소드는 화살표 함수로 정의하면 안됨
+          this.message = this.message.split('').reverse().join('')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

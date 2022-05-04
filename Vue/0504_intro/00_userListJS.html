@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaniila JavaScript</title>
+</head>
+<body>
+  <label for="inputArea">userName: </label>
+  <input type="text" id="inputArea">
+  <hr>
+
+  <h1>안녕하세요 <span id="userName1"></span></h1>
+
+  <div>
+    <span id="userName2"></span>님의 친구목록
+  </div>
+
+  <div>
+    <span id="userName3"></span>님의 알림목록
+  </div>
+
+  <div>
+    <span id="userName4"></span>님의 친구 요청 목록
+  </div>
+
+  <script>
+    //1. 선택 
+    const inputArea = document.querySelector('#inputArea')
+    const userName1 = document.querySelector('#userName1')
+    const userName2 = document.querySelector('#userName2')
+    const userName3 = document.querySelector('#userName3')
+    const userName4 = document.querySelector('#userName4')
+
+    userName1.innerText = 'Unknown'
+    userName2.innerText = 'Unknown'
+    userName3.innerText = 'Unknown'
+    userName4.innerText = 'Unknown'
+
+    //2. 이벤트 등록
+    inputArea.addEventListener('input', function (event) {
+      const newUserName = event.target.value
+
+      //3. 변경
+      userName1.innerText = newUserName
+      userName2.innerText = newUserName
+      userName3.innerText = newUserName
+      userName4.innerText = newUserName
+    })
+  </script>
+</body>
+</html>
