@@ -413,3 +413,27 @@ pip-selfcheck.json
 # Support for Project snippet scope
 
 # End of https://www.toptal.com/developers/gitignore/api/venv,django,visualstudiocode
+
+.DS_Store
+node_modules
+/dist
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

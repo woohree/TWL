@@ -460,7 +460,7 @@ def likes(request, article_pk):
 ```
 
 - exists()
-  - 쿼리셋에 결과가 포함되어 있따면 True, 그 외, False
+  - 쿼리셋에 결과가 포함되어 있다면 True, 그 외, False
 
 ```django
 <!-- articles/index.html -->

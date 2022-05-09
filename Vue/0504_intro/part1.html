@@ -26,7 +26,7 @@
       <button @click="minus">-</button>
     </div>
 
-    <div :class="darkMode ? 'dark-mode' : 'light-mode'">
+    <div :class="modeByDark">
       <ul>
         <li v-for="article in articles" :style="{ fontSize: fontSize + 'px'}">
           <strong>{{ article.title }}</strong>: {{ article.content }}
@@ -65,6 +65,9 @@
         },
         h1Message() {
           return this.darkMode ? 'Dark Mode' : 'Light Mode'
+        },
+        modeByDark() {
+          return this.darkMode ? 'Dark-mode' : 'Light-mode'
         }
       }
     })
