@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <!-- 3. 보여주기, print -->
     <!-- 카멜 케이스 -->
-    <TheAbout :my-message='parentData'/>
+    <!-- <TheAbout :my-message='parentData'/> -->
     <!-- 케밥 케이스 -->
     <the-about :my-message='parentData' @child-input-change='ParentGetChange'></the-about>
   </div>
@@ -19,7 +19,7 @@ export default {
   components: {
     TheAbout,
   },
-  data: function () {
+  data() {
     return {
       parentData: 'This!! is!! parent!!'
     }

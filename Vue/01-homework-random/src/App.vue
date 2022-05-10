@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <router-link :to="{ name: 'lunch' }">Lunch Picker</router-link> | 
+      <router-link :to="{ name: 'lunch' }">Lunch Picker</router-link> |
       <router-link :to="{ name: 'lotto', params: { count: 6 } }">Lucky Numbers</router-link>
     </nav>
     <div>

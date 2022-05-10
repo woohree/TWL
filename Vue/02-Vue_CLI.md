@@ -211,15 +211,15 @@ $vue add router  # 어쩌구 y/n 나오면 그냥 무지성 y 때려도 무방
 #### 프로그래밍 방식 네비게이션
 
 - router-link가 아닌, router의 인스턴스 메소드를 사용해 프로그래밍 방식으로 같은 작업 수행 가능
-- vue 인스턴스 내부에서 라우터 인스턴스에 $router로 접근이 가능
+- vue 인스턴스 내부에서 라우터 인스턴스에 `$router`로 접근이 가능
   - `this.$router.push`로 다른 URL 호출 가능
   - `<router-link :to="..."> === $router.push(...)`
 
-#### dynamic rout matching
+#### dynamic route matching
 
 - 동적 인자 전달
 - 주어진 패턴을 가진 라우트를 동일한 컴포넌트에 매핑해야 하는 경우
-- 컴포넌트에서 this.$route.params로 사용 가능
+- 컴포넌트에서 `this.$route.params`로 사용 가능
 - ![image-20220509163150056](02-Vue_CLI.assets/image-20220509163150056.png)
 
 ### component & views
@@ -335,5 +335,3 @@ export default {
 - Vue Router는 라우팅의 결정권을 가진 Vue.js에서 라우팅을 편리하게 할 수 있는 tool을 제공해주는 라이브러리
 
 
-
-## Youtube Project

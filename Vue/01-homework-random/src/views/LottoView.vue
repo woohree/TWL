@@ -5,7 +5,7 @@
       <h2>{{ luckyNumbers }}</h2>
       <button @click="pickLotto">위이이잉..!</button>
     </div>
-    <p>/lotto/6 => 6개 뽑기
+    <p>/lotto/6 => 6개 뽑기,
       /lotto/7 => 7개 뽑기
     </p>
   </div>
@@ -19,13 +19,16 @@ export default {
   data() {
     return {
       count: this.$route.params.count,
-      luckyNumbers: []
+      luckyNumbers: []  
     }
   },
   methods: {
     pickLotto() {
       this.luckyNumbers = _.sampleSize(_.range(1, 46), this.count)
     }
+  },
+  created() {
+    this.pickLotto()
   }
 }
 </script>

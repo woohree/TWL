@@ -13,7 +13,7 @@ export default {
   props: {
     myMessage: String,
   },
-  data: function() {
+  data() {
     return {
       childInputData: '들리냐고'
     }
