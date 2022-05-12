@@ -44,7 +44,7 @@
 - JS는 single threaded
   - 컴퓨터가 여러 cpu를 갖고 있어도 main thread라 불리는 단일 스레드에서만 작업 수행
   - 이벤트를 처리하는 call stack이 하나인 언어라는 의미
-  - 이를 해결하기 위해 JS는, p.27
+  - 이를 해결하기 위해 JS는,
     1. 즉시 처리하지 못하는 이벤트들을 Web API로 보내서 처리
     2. 처리된 이벤트들은 Task queue에 줄 세움
     3. call stack이 비면 Event Loop이 Task queue에서 가장 앞의 이벤트를 call stack으로 보냄

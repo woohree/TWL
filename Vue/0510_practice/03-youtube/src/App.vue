@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <search-bar :is-videos="!!videos.length" @search-keyword="fetchVideos"></search-bar>
+      <search-bar :is-videos="!!videos.length" @search-keyword="fetchVideos" @re-search="onReSearch"></search-bar>
     </header>
     <section>
       <video-detail :video="selectedVideo"></video-detail>
@@ -51,9 +51,41 @@ export default {
     })
         .catch(err => console.error(err))
     },
+
     setVideo(video) {
       this.selectedVideo = video
       console.log(video)
+    },
+
+    onReSearch(input) {
+      input.value = ''
+
+      // Fade-out 함수 ㅋㅋ 
+      let opacity = 0
+      let intervalID = 0
+      const hide = () => {
+        const section = document.querySelector("section");
+        opacity = Number(window.getComputedStyle(section).getPropertyValue("opacity"))
+        
+        if(opacity>0){
+          opacity -= 0.1
+          section.style.opacity = opacity
+          console.log(section.style.opacity)
+        }
+        else{
+          clearInterval(intervalID)
+          console.log(this)
+          this.videos = []
+          this.selectedVideo = {}
+        }
+      }
+
+      intervalID = setInterval(hide, 50)
+
+    },
+
+    onEnter(event) {
+      console.log(event)
     }
   },
 }
@@ -69,4 +101,5 @@ export default {
   section {
     display: flex;
   }
+  
 </style>

@@ -47,7 +47,6 @@ export default {
   .video-container > iframe {
     position: absolute;
     top: 0;
-    /* bottom: 0; */
     width: 100%;
     height: 100%;
   }
@@ -56,5 +55,8 @@ export default {
     padding: 20px;
     border: solid 1px lightgray;
     border-radius: 10px;
+  }
+  .video-info > h4 {
+    font-weight: bold;
   }
 </style>

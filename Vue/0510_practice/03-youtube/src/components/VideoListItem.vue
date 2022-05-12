@@ -20,6 +20,10 @@ export default {
   },
   filters: {
     strUnescape(rawText) {
+      // console.log(rawText.length)
+      if (rawText.length > 50) {
+        rawText = rawText.slice(0, 50) + '...'
+      }
       return _.unescape(rawText)
     },
   },
@@ -34,8 +38,8 @@ export default {
 <style>
   .list-group-item {
     display: flex;
-    margin-bottom: 1rem;
     cursor: pointer;
+    font-weight: bold;
   }
   .list-group-item:hover {
     background-color: #eee;
