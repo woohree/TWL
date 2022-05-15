@@ -178,7 +178,7 @@ export default {
 ## Vue Router
 
 - 라우트(route)에 컴포넌트를 매핑하고, 어떤 주소에서 렌더링할 지 알려줌
-- SPA 상에서 라우팅을 쉽게 개발할 수 있는 기능을 제공
+- SPA(Single Page Application) 상에서 라우팅을 쉽게 개발할 수 있는 기능을 제공
 
 ```bash
 $vue add router  # 어쩌구 y/n 나오면 그냥 무지성 y 때려도 무방
@@ -333,5 +333,4 @@ export default {
 - SPA 등장 이후, 서버는 index.html 하나만 제공
 - 이후 모든 처리는 HTML 위에서 JS 코드를 활용해 진행하고, 요청에 대한 처리를 더이상 서버가 하지 않음
 - Vue Router는 라우팅의 결정권을 가진 Vue.js에서 라우팅을 편리하게 할 수 있는 tool을 제공해주는 라이브러리
-
 
