@@ -322,7 +322,7 @@ export default new Vuex.Store({
 
 - Vuex state를 자동으로 브라우저의 LocalStorage에 저장해주는 라이브러리
 
-- ```bash
+  ```bash
   $ npm i vuex-persistedstate
   ```
 

@@ -169,9 +169,9 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         # 모두에게 허용
-        # 'rest_framework.permissions.AllowAny', 
+        'rest_framework.permissions.AllowAny', 
 
         # 인증된 사용자만 모든일이 가능 / 비인증 사용자는 모두 401 Unauthorized
-        'rest_framework.permissions.IsAuthenticated'
+        # 'rest_framework.permissions.IsAuthenticated'
     ]
 }

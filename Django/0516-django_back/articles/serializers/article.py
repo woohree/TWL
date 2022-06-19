@@ -12,7 +12,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     class UserSerializer(serializers.ModelSerializer):
         class Meta:
             model = User
-            fields = ('pk', 'username')
+            fields = ('username',)
 
     comments = CommentSerializer(many=True, read_only=True)
     user = UserSerializer(read_only=True)
@@ -28,7 +28,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
     class UserSerializer(serializers.ModelSerializer):
         class Meta:
             model = User
-            fields = ('pk', 'username')
+            fields = ('username',)
 
     user = UserSerializer(read_only=True)
     # queryset annotate (views에서 채워줄것!)
@@ -37,4 +37,4 @@ class ArticleListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('pk', 'user', 'title', 'comment_count', 'like_count')
+        fields = ('pk', 'user', 'title', 'comment_count', 'like_count', 'username')
