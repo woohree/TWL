@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="subject"></div>
+  <div id="toc"></div>
+  <div id="control"></div>
+  <div id="article"></div>
+
+  <script>
+    function subject() {
+      document.querySelector('#subject').innerHTML = `
+      <header>
+        <h1>WEB</h1>
+        Hello, WEB!
+      </header>
+      `
+    }
+    
+    function TOC() {
+      const state = store.getState()
+      let i = 0
+      let liTags = ''
+      // console.log(state)
+      while (i < state.contents.length) {
+        liTags += `
+          <li>
+            <a href="${state.contents[i].id}" onclick="
+              event.preventDefault()
+              const action = {type:'SELECT', id: ${state.contents[i].id}}
+              store.dispatch(action)
+            ">
+              ${state.contents[i].title}
+            </a>
+          </li>
+        `
+        i++
+      }
+      document.querySelector('#toc').innerHTML = `
+      <nav>
+        <ol>
+          ${liTags}     
+        </ol>
+      </nav>
+      `
+    }
+        
+    function control() {
+      document.querySelector('#control').innerHTML = `
+      <ul>
+        <li><a href="/create" onclick="
+            event.preventDefault()
+            store.dispatch({type:'CHANGE_MODE', mode: 'create'})
+          ">create</a></li>
+        <li><input type="button" value="delete" onclick="
+            store.dispatch({type: 'DELETE',})
+          "></input></li>
+      </ul>
+      `
+    }
+          
+    function article() {
+      const state = store.getState()
+      if (state.mode === 'create') {
+        document.querySelector('#article').innerHTML = `
+        <article>
+          <form onsubmit="
+            event.preventDefault()
+            let title = this.title.value
+            let desc = this.desc.value
+            store.dispatch({type:'CREATE', title: title, desc: desc})
+          ">
+            <p>
+              <input type="text" name="title" placeholder="title">
+            </p>
+            <p>
+              <textarea name="desc" placeholder="description"></textarea>
+            </p>
+            <p>
+              <input type="submit">
+            </p>
+        </article>
+        `
+      } else if (state.mode === 'read') {
+        let i = 0
+        let articleTitle, articleDesc
+        while (i < state.contents.length) {
+          if (state.contents[i].id === state.selectedId) {
+            articleTitle = state.contents[i].title
+            articleDesc = state.contents[i].desc
+            break
+          }
+          i++
+        }
+        document.querySelector('#article').innerHTML = `
+        <article>
+          <h2>${articleTitle}</h2>
+          ${articleDesc}
+        </article>
+        `
+      } else if (state.mode === 'home') {
+        document.querySelector('#article').innerHTML = `
+        <article>
+          <h2>Home</h2>
+          Hello, REDUX
+        </article>
+        `
+      }
+
+    }
+
+    
+    function reducer(state, action) {
+      // console.log(state, action)
+      if (state === undefined) {
+        return {
+          lastId: 2,
+          mode: 'home',
+          selectedId: '',
+          contents: [
+            {id: 1, title: 'HTML', desc: 'HTML is ...'},
+            {id: 2, title: 'CSS', desc: 'CSS is ...'},
+          ],
+        }
+      }
+
+      let newState = {}
+      if (action.type === 'SELECT') {
+        newState = Object.assign({}, state, {selectedId: action.id, mode: 'read'})
+      } else if (action.type === 'CREATE') {
+        console.log(state.contents)
+        let newId = state.lastId + 1
+        let newContents = state.contents.concat()
+        newContents.push({id: newId, title: action.title, desc: action.desc})
+        newState = Object.assign({}, state, {
+          lastId: newId,
+          mode: 'read',
+          contents: newContents,
+          selectedId: newId,
+        })
+      } else if (action.type === 'DELETE') {
+        let i = 0
+        const newContents = []
+        while (i < state.contents.length) {
+          if (state.selectedId !== state.contents[i].id) {
+            newContents.push(state.contents[i])
+          }
+          i++
+        }
+        newState = Object.assign({}, state, {contents: newContents, mode: 'home'})
+      } else if (action.type === 'CHANGE_MODE') {
+        newState = Object.assign({}, state, {mode: action.mode})
+      }
+      // console.log(newState)
+      return newState
+    }
+    const store = Redux.createStore(reducer)
+    store.subscribe(article)
+    store.subscribe(TOC)
+    
+    subject()
+    TOC()
+    control()
+    article()
+  </script>
+</body>
+</html>
